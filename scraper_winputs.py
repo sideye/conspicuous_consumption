@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as soup
 import json
 import datetime
+import re
 
 
 def get_datetime(time_code):
@@ -42,10 +43,12 @@ def single_post_comments(shortcode, file):
 	post_details = node['id'] + ', ' + node['shortcode'] + ', ' + str(node['edge_media_preview_like']['count']) + ', ' + str(node['edge_media_to_comment']['count']) + ', ' + datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S') + ', '
 	
 	#Caption: if no caption exists, caption is "N/A"
-	try:
+	try :
 		caption = str(node['edge_media_to_caption']['edges'][0]['node']['text'])
 	except:
 		caption = 'N/A'
+	#replaces commas with spaces
+	caption = re.sub(r'[,\n]', ' ', caption)
 	post_details += caption + ', '
 
 	post_details += str(node['is_video']) + ', '
@@ -54,10 +57,16 @@ def single_post_comments(shortcode, file):
 	else:
 		post_details += 'N/A' + ', '
 
-	#TODO: Grab tags
+	#Scrapes caption for hashtags and mentions
+	#Credit: https://gist.github.com/mahmoud/237eb20108b5805aed5f
+	# tags = re.findall("(?:^|\s)[＃#]{1}(\w+)", caption)
+	# mentions = re.findall("(?:^|\s)[＠ @]{1}([^\s#<>[\]|{}]+)", caption)
+	# print(tags)
+	# print(mentions)
 
 	#Has comments
-	if len(node['edge_media_to_comment']['edges']) == 0:
+	num_comments = int(node['edge_media_to_comment']['count'])
+	if num_comments == 0:
 		post_details += "false" + ', '
 		file.write(post_details + 'N/A, N/A, N/A, N/A')
 		file.write('\n')
@@ -67,7 +76,9 @@ def single_post_comments(shortcode, file):
 	for comment in node['edge_media_to_comment']['edges']: 
 		file.write(post_details)
 		node = comment['node']
-		file.write(str(node['id']) + ', ' + str(node['owner']['username']) + ', ' + datetime.datetime.fromtimestamp(int(node['created_at'])).strftime('%Y-%m-%d %H:%M:%S') + ', ' + str(node['text']))
+		#replaces commas with spaces
+		comment_text = re.sub(r'[,\n]', ' ', str(node['text']))
+		file.write(str(node['id']) + ', ' + str(node['owner']['username']) + ', ' + datetime.datetime.fromtimestamp(int(node['created_at'])).strftime('%Y-%m-%d %H:%M:%S') + ', ' + comment_text)
 		file.write('\n')
 
 
@@ -136,21 +147,27 @@ shortcodes_test = ['BhJRE1PhUdf']
 # file.close()
 
 # file = open("data_test.csv","w")
-# file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+# file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
 # for code in shortcodes_test:
 # 	single_post_comments(code, file)
 # file.close()
 
 file = open("outputs/data_cavesduroy.csv","w")
-file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
 for code in shortcodes_cavesduroyST:
 	single_post_comments(code, file)
 file.close()
 
+# file = open("outputs/data_prysmCH.csv","w")
+# file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+# for code in shortcodes_prysmCH:
+# 	single_post_comments(code, file)
+# file.close()
+
 # for club in clubs:
 # 	file_path = "outputs/data_" + club + ".csv"
 # 	file = open(file_path, "w")
-# 	file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+# 	file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
 # 	for code in clubs[club]:
 # 		single_post_comments(code, file)
 # 	file.close()

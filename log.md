@@ -12,14 +12,24 @@ I mainly focused on getting post shortcodes this week:
 
 
 6/6
-
+Overall, I've modified the code to scrape comments. I think the URL extension trick scrapes in exactly the first 40 comments.
 Completed:
 - Added some more data collection to current code (scraper_winputs.py): you can refer to the data_test.csv file within the outputs folder of the repo, which scraped 1 particular post with 13 comments (this one: https://www.instagram.com/p/BhJRE1PhUdf/). 
 	- Factored code to scrape comments using a new function “single_post_comments”. Features collected for each comment are comment id, comment username, comment time, and comment text. Each post can be grouped by post_id to see a more coarse value of each post. 
 	- Factored code to scrape post caption, with column name “CAPTION”. If no caption exists, “N/A” is outputted for that entry. 
+	- Implemented regex to scrape hashtags and mentions (tagged users) from post caption and comments. However, I am not sure how to implement this into the table (see issues below), so it is currently commented out and not in practice.
+- Updated cavesduroyST current given shortcodes in the script to include the above added columns/features. 
 
-Issues:
-- Since the output file is in CSV format, the code breaks if either the caption or any comment includes a comma. One solution is to remove commas completely from the texts.
-- I have currently scraped the tags of each post and stored them in a list. However, I’m not quite sure how to display them in the current table format.
+Issues resolved/need to be resolved:
+- Since the output file is in CSV format, the output breaks (does not adhere to desired table format) if either the caption or comment includes a comma or new line (\n). Currently, I have been changing them to spaces to avoid this; tell me if you want to change it to something else. 
+- I have currently scraped the tags and mentions of each post and comment, storing both in lists. However, I’m not quite sure how to display them in the current table format.
 - Due to the nature of the table, if a post has no comments, currently it is not outputted at all. I've currently dealt with this by adding a "has comments?" column with true/false values to not discount posts without comments. If a post has no comments, then its 4 comment columns are marked as "N/A"
+- The like preview (edge_media_preview_like) allows us to scrape the first(?) 10 users who liked the post. I can implement this if you want, although it may not be a representative or accurate sample. 
+- Some of the posts have a JSON decoding error: not sure why this is happening. Does not appear to be a bug in the scraper. Will look into later.
 
+
+Next steps
+- Look into JSON decoding error.
+- I think I should be able to download the pictures using this script, if you'd like.
+- Resolve how to store mentions and tags in comments and captions.
+- Determine how to scrape likes.
