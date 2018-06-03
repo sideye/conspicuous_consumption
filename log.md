@@ -2,8 +2,6 @@
 
 Overall, I came in expecting quick success in scraping instagram for all sorts of data, but I soon realized that this was much harder than I had imagined. I estimate I put in about 8-10 hours looking into this, and I have to say that the results are not as successful as I would have liked. 
 
-Anyways, here are some of my notes. I can compile this into a google doc or note something for easier collaboration and documentation if you'd like.
-
 I mainly focused on getting post shortcodes this week:
 - Instagram official API: didn't work. I think Facebook requires users of its graph API to be developers with apps and privacy policies. 
 - This Instagram scraper (https://github.com/rarcega/instagram-scraper) using python: this app seems very promising. I found success with this for the first couple tries, but it stopped working on my end soon after so that I could not implement modifications. The app also has a lot of features including scraping for comments/likes/hashtags. I think we can modify the code pretty easily (from looking at app.py, follow and trace the scrape method) to scrape shortcodes.
@@ -14,11 +12,14 @@ I mainly focused on getting post shortcodes this week:
 
 
 6/6
+
 Completed:
 - Added some more data collection to current code (scraper_winputs.py): you can refer to the data_test.csv file within the outputs folder of the repo, which scraped 1 particular post with 13 comments (this one: https://www.instagram.com/p/BhJRE1PhUdf/). 
 	- Factored code to scrape comments using a new function “single_post_comments”. Features collected for each comment are comment id, comment username, comment time, and comment text. Each post can be grouped by post_id to see a more coarse value of each post. 
 	- Factored code to scrape post caption, with column name “CAPTION”. If no caption exists, “N/A” is outputted for that entry. 
-Issues:
-- I have currently scraped the tags of each post and stored them in a list. However, I’m not quite sure how to display them in the current table format.
 
+Issues:
+- Since the output file is in CSV format, the code breaks if either the caption or any comment includes a comma. One solution is to remove commas completely from the texts.
+- I have currently scraped the tags of each post and stored them in a list. However, I’m not quite sure how to display them in the current table format.
+- Due to the nature of the table, if a post has no comments, currently it is not outputted at all. I've currently dealt with this by adding a "has comments?" column with true/false values to not discount posts without comments. If a post has no comments, then its 4 comment columns are marked as "N/A"
 

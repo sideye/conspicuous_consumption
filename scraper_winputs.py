@@ -49,7 +49,6 @@ def single_post_comments(shortcode, file):
 	post_details += caption + ', '
 
 	post_details += str(node['is_video']) + ', '
-
 	if node['is_video']:
 		post_details += str(node['video_view_count']) + ', '
 	else:
@@ -57,6 +56,13 @@ def single_post_comments(shortcode, file):
 
 	#TODO: Grab tags
 
+	#Has comments
+	if len(node['edge_media_to_comment']['edges']) == 0:
+		post_details += "false" + ', '
+		file.write(post_details + 'N/A, N/A, N/A, N/A')
+		file.write('\n')
+	else:
+		post_details += "true" + ', '
 
 	for comment in node['edge_media_to_comment']['edges']: 
 		file.write(post_details)
@@ -136,7 +142,7 @@ shortcodes_test = ['BhJRE1PhUdf']
 # file.close()
 
 file = open("outputs/data_cavesduroy.csv","w")
-file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
 for code in shortcodes_cavesduroyST:
 	single_post_comments(code, file)
 file.close()
