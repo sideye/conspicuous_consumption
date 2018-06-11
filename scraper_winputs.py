@@ -31,7 +31,7 @@ def single_post(shortcode, file):
 	file.write('\n')
 
 
-def single_post_comments(shortcode, file):
+def single_post_comments(shortcode, file_posts, file_comments):
 	url = 'https://instagram.com/p/' + shortcode + '/?__a=1'
 	r = requests.get(url)
 
@@ -39,14 +39,17 @@ def single_post_comments(shortcode, file):
 	new_dict = json.loads(str(b_soup))
 	new_dict = new_dict['graphql']
 	node = new_dict['shortcode_media']
-	print("Currently working on: ", node['shortcode'])
+
+
+	#I. Write Post
+	#Basic details 
 	post_details = node['id'] + ', ' + node['shortcode'] + ', ' + str(node['edge_media_preview_like']['count']) + ', ' + str(node['edge_media_to_comment']['count']) + ', ' + datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S') + ', '
 	
-	#Caption: if no caption exists, caption is "N/A"
+	#Caption
 	try :
 		caption = str(node['edge_media_to_caption']['edges'][0]['node']['text'])
 	except:
-		caption = 'N/A'
+		caption = ''
 	#replaces commas with spaces
 	caption = re.sub(r'[,\n]', ' ', caption)
 	post_details += caption + ', '
@@ -59,27 +62,49 @@ def single_post_comments(shortcode, file):
 
 	#Scrapes caption for hashtags and mentions
 	#Credit: https://gist.github.com/mahmoud/237eb20108b5805aed5f
-	# tags = re.findall("(?:^|\s)[＃#]{1}(\w+)", caption)
-	# mentions = re.findall("(?:^|\s)[＠ @]{1}([^\s#<>[\]|{}]+)", caption)
-	# print(tags)
-	# print(mentions)
+	tags = re.findall("(?:^|\s)[＃#]{1}(\w+)", caption)
+	mentions = re.findall("(?:^|\s)[＠ @]{1}([^\s#<>[\]|{}]+)", caption)
+	tag_string = ""
+	for tag in tags:
+		tag_string += tag + " "
+	mention_string = ""
+	for mention in mentions:
+		mention_string += mention + " "
+	post_details += tag_string + ', ' + mention_string + ', '
 
 	#Has comments
 	num_comments = int(node['edge_media_to_comment']['count'])
 	if num_comments == 0:
-		post_details += "false" + ', '
-		file.write(post_details + 'N/A, N/A, N/A, N/A')
-		file.write('\n')
+		post_details += "false"
+		
 	else:
-		post_details += "true" + ', '
+		post_details += "true"
+	file_posts.write(post_details)
+	file_posts.write('\n')
 
+
+	#II. Write Comments
 	for comment in node['edge_media_to_comment']['edges']: 
-		file.write(post_details)
+		comment_details = shortcode + ', '
 		node = comment['node']
 		#replaces commas with spaces
 		comment_text = re.sub(r'[,\n]', ' ', str(node['text']))
-		file.write(str(node['id']) + ', ' + str(node['owner']['username']) + ', ' + datetime.datetime.fromtimestamp(int(node['created_at'])).strftime('%Y-%m-%d %H:%M:%S') + ', ' + comment_text)
-		file.write('\n')
+
+		comment_details += str(node['id']) + ', ' + str(node['owner']['username']) + ', ' + datetime.datetime.fromtimestamp(int(node['created_at'])).strftime('%Y-%m-%d %H:%M:%S') + ', ' + comment_text + ', '
+
+		#finds tags and mentions
+		tags = re.findall("(?:^|\s)[＃#]{1}(\w+)", comment_text)
+		mentions = re.findall("(?:^|\s)[＠ @]{1}([^\s#<>[\]|{}]+)", comment_text)
+		tag_string = ""
+		for tag in tags:
+			tag_string += tag + " "
+		mention_string = ""
+		for mention in mentions:
+			mention_string += mention + " "
+		comment_details += tag_string + ', ' + mention_string
+
+		file_comments.write(comment_details)
+		file_comments.write('\n')
 
 
 #Put your shortcodes in the next line in the following format shortcodes = ['Bg9WTITBE2N', 'BfnwmP2hY4d', 'BeD0vn7h-7E']
@@ -146,17 +171,31 @@ shortcodes_test = ['BhJRE1PhUdf']
 # 	single_post(code, file)
 # file.close()
 
-# file = open("data_test.csv","w")
+# errors = []
+# file_posts = open("data_cavesduroy_posts.csv","w")
+# file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, TAGS, MENTIONS, HAS_COMMENTS\n")
+# file_comments = open("data_cavesduroy_comments.csv", "w")
+# file_comments.write("SHORTCODE, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT, COMMENT_TAGS, COMMENT_MENTIONS\n")
+# for code in shortcodes_cavesduroyST:
+# 	single_post_comments(code, file_posts, file_comments)
+# 	# except:
+# 	# 	errors += [code]
+# 	# 	print("Error on:", code)
+# file_posts.close()
+# file_comments.close()
+
+
+# file = open("data_rudas.csv","w")
 # file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
-# for code in shortcodes_test:
+# for code in shortcodes_rudas:
 # 	single_post_comments(code, file)
 # file.close()
 
-file = open("outputs/data_cavesduroy.csv","w")
-file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
-for code in shortcodes_cavesduroyST:
-	single_post_comments(code, file)
-file.close()
+# file = open("outputs/data_cavesduroy.csv","w")
+# file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+# for code in shortcodes_cavesduroyST:
+# 	single_post_comments(code, file)
+# file.close()
 
 # file = open("outputs/data_prysmCH.csv","w")
 # file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
@@ -164,10 +203,37 @@ file.close()
 # 	single_post_comments(code, file)
 # file.close()
 
-# for club in clubs:
-# 	file_path = "outputs/data_" + club + ".csv"
-# 	file = open(file_path, "w")
-# 	file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
-# 	for code in clubs[club]:
-# 		single_post_comments(code, file)
-# 	file.close()
+# file = open("data_grandSF.csv","w")
+# file.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, HAS_COMMENTS, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT\n")
+# for code in shortcodes_grandSF:
+# 	single_post_comments(code, file)
+# file.close()
+
+errors = []
+for club in clubs:
+	print("Working on", club)
+	file_posts_path = "outputs/data_" + club + "_posts.csv"
+	file_posts = open(file_posts_path, "w")
+	file_comments_path = "outputs/data_" + club + "_comments.csv"
+	file_comments = open(file_comments_path, "w")
+	file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, TAGS, MENTIONS, HAS_COMMENTS\n")
+	file_comments.write("SHORTCODE, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT, COMMENT_TAGS, COMMENT_MENTIONS\n")
+	index = 1
+	for code in clubs[club]:
+		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
+		index += 1
+		try:
+			single_post_comments(code, file_posts, file_comments)
+		except:
+			errors += [code]
+			print("Error on:", code)
+	file_posts.close()
+	file_comments.close()
+
+print(errors)
+file_errors = open("outputs/errors.csv", "w")
+file_errors.write("SHORTCODE\n")
+for error in errors:
+	file_errors.write(error)
+	file_errors.write("\n")
+file_errors.close()

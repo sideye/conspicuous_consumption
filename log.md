@@ -35,3 +35,18 @@ Next steps
 - I think I should be able to download the pictures using this script, if you'd like.
 - Resolve how to store mentions and tags in comments and captions.
 - Determine how to scrape likes.
+
+
+6/10
+
+Completed:
+- Modified table schema into 2 tables as discussed, 1 table purely for posts and another for comments. Both tables can be joined on shortcodes. 
+- Changed: if a post had no caption, the data entry for the caption column is now empty (a NaN) instead of "N/A"
+- Added features to scrape tags (proceeding a #) and mentions (proceeding a @) for both comments and posts, so these features exist in both the post and comments tables. Each hashtag or username is separated by a space. 
+- Wrote some simple automation to scrape all clubs in one run. Ran the implementation and wrote the results from scraping all given shortcodes from all clubs in the outputs directory. 
+	- Estimated scraping speed: ~80 posts per minute. 
+- Added and try-except block to handle errors gracefully. This avoids the JSON decoding error from last week. Often, these posts are posts that were deleted on instagram. All erroring posts' shortcodes are stored and saved into an errors.csv file, which is in the outputs directory, with all other output files.
+
+Issues resolved/need to be resolved:
+- Some of the video view counts are incorrect with 0 views. This is an error on instagram's part as the source JSON is simply wrong (indicates 0 views) and hence we cannot do much about it. This is something to be aware of when doing data analysis. 
+- 
