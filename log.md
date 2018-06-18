@@ -45,8 +45,12 @@ Completed:
 - Added features to scrape tags (proceeding a #) and mentions (proceeding a @) for both comments and posts, so these features exist in both the post and comments tables. Each hashtag or username is separated by a space. 
 - Wrote some simple automation to scrape all clubs in one run. Ran the implementation and wrote the results from scraping all given shortcodes from all clubs in the outputs directory. 
 	- Estimated scraping speed: ~80 posts per minute. 
-- Added and try-except block to handle errors gracefully. This avoids the JSON decoding error from last week. Often, these posts are posts that were deleted on instagram. All erroring posts' shortcodes are stored and saved into an errors.csv file, which is in the outputs directory, with all other output files.
+- Added and try-except block to handle errors gracefully. This avoids the JSON decoding error from last week. Often, these posts are posts that were deleted on instagram. All erroring posts' shortcodes and error types (e.g. JSON decoding erorr) are stored and saved into an errors.csv file, which is in the outputs directory, with all other output files.
+- Added a column to scrape the first 10 likes, which is all that is displayed in the JSON file. These results were scraped into the outputs2 directory. (However the error file in that directory is not correct as I had to restart the code halfway, so refer to all errors from the outputs directory).
 
 Issues resolved/need to be resolved:
 - Some of the video view counts are incorrect with 0 views. This is an error on instagram's part as the source JSON is simply wrong (indicates 0 views) and hence we cannot do much about it. This is something to be aware of when doing data analysis. 
-- 
+
+Next steps
+- Look into solutions that allow us to scrape more likes
+- Look into Microsoft face APIs to perhaps to gender + face prediction based on instagram profile photos
