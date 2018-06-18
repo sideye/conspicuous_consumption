@@ -1,5 +1,5 @@
 import cognitive_face as CF
-
+# Getting Started: https://docs.microsoft.com/en-us/azure/cognitive-services/face/tutorials/faceapiinpythontutorial
 KEY = '875ba7bdf8df47da919b047314b97ca9'  # Replace with a valid subscription key (keeping the quotes in place).
 CF.Key.set(KEY)
 

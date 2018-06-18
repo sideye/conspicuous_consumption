@@ -125,6 +125,7 @@ def detect_face(url):
 	Uses Microsoft Cognitive Services' face API. 
 	Get started guide: https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/python
 	Documentation: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+	Useful video: https://www.youtube.com/watch?v=WysMruemktY&t=1126s
 	"""
 	params = {
 		'returnFaceId': 'true',
