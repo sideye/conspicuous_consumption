@@ -125,7 +125,7 @@ def detect_face(url):
 	Uses Microsoft Cognitive Services' face API. 
 	Get started guide: https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/python
 	Documentation: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
-	Useful video: https://www.youtube.com/watch?v=WysMruemktY&t=1126s
+	Demo video: https://www.youtube.com/watch?v=WysMruemktY&t=1126s
 	"""
 	params = {
 		'returnFaceId': 'true',
@@ -158,9 +158,8 @@ shortcodes_prysmCH = ['Bi0SFFHHyaL'	,'Bi0A-5TlNSc'	,'Bixa3bYlalU'	,'BixNj4rHjZX'
 shortcodes_cavesduroyST = ['3B8LmzhNAZ'	,'3e3HoAhNCG'	,'3e4TKOhNEc'	,'31S2ldhNDk'	,'4m3-UwhNDS'	,'468cjSBNBh'	,'5OwG_-BNDm'	,'5aEPpNBNMg'	,'58AcYWBNFB'	,'5-QJDyBNLh'	,'6VnyqxhNNP'	,'6ial93BNN5'	,'6ka0CahNBj'	,'6qSgQJBNHZ'	,'7OMPdzhNA0'	,'7xyKP0hNMl'	,'8AqgViBNEZ'	,'8OpYM4hNLU'	,'9O2b08hND8'	,'9b3OVlBNHG'	,'BAUm0o0BNAF'	,'BAmn7hYhNAg'	,'BBNr1iXhNCX'	,'BB5zRqhhNJH'	,'BC05JarhNDP'	,'BC89x-ZhNLH'	,'BDb5MouBNN_'	,'BEjjBfyhNIu'	,'BEl5MhXBNBk'	,'BFEtYIiBNMO'	,'BFHwTGQhNKK'	,'BFMcpJNBNHz'	,'BFWmSrohNKW'	,'BFYn4nDhNPt'	,'BFbvn0ABNIK'	,'BFgpMIFhNPh'	,'BFmnpNOBNAG'	,'BFpJSbhBNJl'	,'BFuEHZxhNHq'	,'BF64PzpBNGG'	,'BF87hrVBNIp'	,'BGPoxHEhNBw'	,'BGhtNIWhNNH'	,'BGmq3nuhNMk'	,'BGw1udJhNHV'	,'BGzuBS1BNG6'	,'BG2cJnlBNOU'	,'BHFezwph-pe'	,'BHF_DV5BmlJ'	,'BHXvYUaBR9a'	,'BHX8QosBCKo'	,'BHYGckSBZ3w'	,'BHaaKCVhrvH'	,'BHh7IpbhFo0'	,'BHp0X7rhv00'	,'BHsmKJvBos0'	,'BHxnptpBnhG'	,'BH0YPcLAgZz'	,'BH2xWvhB6oN'	,'BH7uoDgBLov'	,'BH-su24hflL'	,'BIBBphbBu96'	,'BID3ja8g6Uk'	,'BIFcZQpBKHT'	,'BIGGpfuAtog'	,'BIPiOfHBhWj'	,'BIX07elhY0U'	,'BIad9UZBftR'	,'BIaem8Uh1hC'	,'BIa_zIqhcX1'	,'BIdSFoAhxEC'	,'BIdbFeaBdFh'	,'BIe53fbh3dK'	,'BIf32AbhHfa'	,'BIf4902hC0f'	,'BIgPgH0haVT'	,'BIiar6oBmDb'	,'BIkbwodBFH9'	,'BIlCQX4hd1-'	,'BIlVPoXh8er'	,'BInq3NkBPub'	,'BIqPBPwBMt8'	,'BIsvXMphEuR'	,'BIvmTm2BuQn'	,'BIvnMj7BnmW'	,'BIx-I5fBis-'	,'BIyIy_MhjWr'	,'BI0hkW6B5XO'	,'BI0iaCghle3'	,'BI0r2NKh0XB'	,'BI3E5FUhKBI'	,'BI5w4T4hfPz'	,'BI5yB4JBJhf'	,'BI7-Si5hXvS'	,'BI8S79nhVUH'	,'BI984TsBPfi'	,'BI-yVOMhUdP'	,'BJBUM46BJnT'	,'BJEKClCBWBt'	,'BJERU_mhu0q'	,'BJGApDuhpdy'	,'BJGlSloht5J'	,'BJJUht5hRHO'	,'BJLvRnrhrNb'	,'BJL4xIFBBTT'	,'BJONKf_hd_T'	,'BJOeRmCh4Uy'	,'BJQvRNIhjZT'	,'BJUy2JzBGdz'	,'BJV3tUZBJfq'	,'BJWF1VdBXX3'	,'BJXSwNIhOgJ'	,'BJYHCp3BPbL'	,'BJYLoSahiQm'	,'BJYyeTOhWY_'	,'BJbPcBOhyJN'	,'BJbUrm0hb1m'	,'BJd4zbwhX-9'	,'BJd6dYAh5cd'	,'BJgTZfTBDKU'	,'BJi9U7fBDUF'	,'BJlD5Z_Brr6'	,'BJm2cTEBpJg'	,'BJoBJm4BavH'	,'BJoDDDGh4MO'	,'BJoRDqah2w6'	,'BJoWiorBLuK'	,'BJs7VpkhePy'	,'BJ2v9ZrBzMa'	,'BJ3ZYMMhMAl'	,'BJ8uFp3h1N2'	,'BJ_RPATB2qn'	,'BKJlRwrBo-p'	,'BKL95Tbhfcj'	,'BKOUg89B6Ba'	,'BKWkUQtBXKz'	,'BKeUGsLhdtt'	,'BKefE9qBEMo'	,'BKegMuEh58J'	,'BKgbIjjB00g'	,'BKg9N2cBF_M'	,'BKvGkhJBCKg'	,'BKv8elRhXx9'	,'BKwWNqJBN3T'	,'BKxu-VwhdQ0'	,'BK3lXwOhh1n'	,'BK7-qH6BPGN'	,'BK_DsbmBmOJ'	,'BLCl58EhfPW'	,'BLMbh7sBYJ8'	,'BLOwF-HhnbZ'	,'BLg4XoshTjU'	,'BLjb69-BnlC'	,'BL_rjLuBnoj'	,'BMCVJZXB6e6'	,'BMKWhN0BJpg'	,'BMSKLTzhzU0'	,'BMcQG0xB9rl'	,'BMmUTPRBwiX'	,'BMrcYtuBJwm'	,'BNAQTGEBBur'	,'BNM7FKMhAmO'	,'BNhmMjQB1qL'	,'BNm36ZPBRtu'	,'BNppNQ2h3cP'	,'BNuj1NkhBq0'	,'BN2U0p3BUNC'	,'BN-DLj6hcTJ'	,'BN-SrHeBwKj'	,'BOIfC8JB-Nh'	,'BONvZd6hZOO'	,'BOYAiisBdc1'	,'BOfm6EXBeg4'	,'BOiDdw1Bkro'	,'BOkmFQ0hjNX'	,'BOprTGbh4cl'	,'BOr5Uc2BEzL'	,'BOswHathYgT'	,'BO29Kslhnwb'	,'BO5plzNBd1x'	,'BPBBR13BwVc'	,'BPEFeF1BMsK'	,'BPIwSIyhgkM'	,'BPLX_1VhnMY'	,'BPQvv20Bpzc'	,'BPapd9MhdEp'	,'BPf8ZYihHBw'	,'BPilqvOhvFE'	,'BPlKNSABdWJ'	,'BPnxloghj05'	,'BPx2hnKh5r1'	,'BP5wTk8hN98'	,'BP8kFgDhfab'	,'BQBU_M4Bcfe'	,'BQD6JYoBx1R'	,'BQGq6-BFaWm'	,'BQJTmu4Futf'	,'BQQw3leltwq'	,'BQTZLVcFZJT'	,'BQV3TG0lHpt'	,'BQbNw2zloQp'	,'BQdrEmcFdBL'	,'BQlcEdDhmtE'	,'BQn4fV8FUap'	,'BQqVkuehfqx'	,'BQtI_gEB2WH'	,'BQ03Q7_BhmF'	,'BQ3be2cBuNv'	,'BQ6RkOFlqSO'	,'BQ8iVEHhG-H'	,'BQ8iiDgB8FN'	,'BQ_T5gMBY8U'	,'BRBu4MmB0Iu'	,'BREkOMPBKdd'	,'BRG2dn2hTow'	,'BRJvaUVh2GU'	,'BRLLQFkBloz'	,'BRO2VgkhVgQ'	,'BRWnlJfBazQ'	,'BRZIzs0BA8p'	,'BReShI1B-Fc'	,'BRg5cK4Bn1N'	,'BRomZeaBdlw'	,'BRttBctBg0J'	,'BRwI8s-h11P'	,'BRytg9ZBR2K'	,'BR4D04ghOy_'	,'BR9JwgvhGoF'	,'BSHOorbB0lK'	,'BSRti1yBZw3'	,'BSUCwBEBSZU'	,'BSW5xpeBorj'	,'BSjo6Nuhu04'	,'BS4Cc0xBsJl'	,'BS9IrB_hjh5'	,'BTUlQN_B5H7'	,'BTeyR0ABZg2'	,'BTo848JByV8'	,'BTxC6KWBGva'	,'BT14HdKhB9k'	,'BT4bfoohLd1'	,'BT7CRsGFuVG'	,'BT7OzJTF8Hr'	,'BT_jDMNhMds'	,'BUNVxV-Bd_U'	,'BUUiBw5BggV'	,'BUVYqOPBOqZ'	,'BUaLXGXhFiX'	,'BUfazk3BbeY'	,'BUhs9VohNAG'	,'BUkczevBy5P'	,'BUkd-hFhN0K'	,'BUmRCwphxfQ'	,'BUnNgDghzVt'	,'BUnUKrMBWEN'	,'BUnVSVUBm7d'	,'BUr0AHYhSV1'	,'BUua3mPBzc9'	,'BU2gwDUhf2d'	,'BU5IbhuhcS5'	,'BVIsgV7n1Li'	,'BVLD1unn-Ji'	,'BVNW8MzHv9J'	,'BVap4wyHaEf'	,'BVdTFsfnhci'	,'BVsiFo9nwKR'	,'BVvPiAqHogf'	,'BV-0zJSHKho'	,'BWBHtG4HopU'	,'BWDOOpcnpfj'	,'BWD2Gf3nz3X'	,'BWGfL6xHtBZ'	,'BWIq0D4HdPi'	,'BWLfmJ9H1-d'	,'BWOI8KSnnHu'	,'BWQzJk1Hwvk'	,'BWTRGO0nFub'	,'BWYgKMhnR9e'	,'BWioDvaHUC9'	,'BWladyKnXyj'	,'BWn9PPNH_5K'	,'BWqkIj_nn4H'	,'BWtA0ikH5sy'	,'BWvs_mmnAEC'	,'BW3GZGwHzf6'	,'BW5iKHfny43'	,'BW-rvxBnXU2'	,'BXD2Uw0HDKI'	,'BXGvUgOnQu4'	,'BXJVBaxHp0x'	,'BXL5WotHxCx'	,'BXOihtgnv_C'	,'BXROSGwntCc'	,'BXTpUIbHhLa'	,'BXWUhIEH_pt'	,'BXYff0bnwAe'	,'BXZC8u1n9ie'	,'BXauVGanN0X'	,'BXbhd6rnQge'	,'BXdvXv7HEds'	,'BXgeFGNHTmJ'	,'BXgnk1_n_PP'	,'BXi_SpynSQs'	,'BXoRMzKHop2'	,'BXq4sjknw56'	,'BXtc0zWn0kb'	,'BXwBin0nQE5'	,'BXyrEKIni7G'	,'BXysE6IHGfL'	,'BX1HC4Onx8-'	,'BX3nd0fH4Xy'	,'BX6cj_7HRHD'	,'BX82-zJnJ8S'	,'BX_a9EXnXk8'	,'BYB260yHWzE'	,'BYEgGxMnFtM'	,'BYHPN2qH_tG'	,'BYL5kUWHrsD'	,'BYO9SVSH5Uf'	,'BYRan83Hrpp'	,'BYgz7oTnxxp'	,'BYjRWDZnQcO'	,'BY1MfZHn8y7'	,'BZHLCDMHhtw'	,'BZWfp-VHJ9x'	,'BZZmN43HCVR'	,'BZojYvknqoG'	,'BZrgpP5H9Xy'	,'BZwKaNoHCsm'	,'BZ6tz9JHPgk'	,'BZ9M-ClniZG'	,'BZ9oEy0HtMt'	,'BaJ85BFnmym'	,'BbxeO2HHNC_'	,'Bb4zJEqHHBg'	,'BcAoOvvHz53'	,'BcQd6sGHyDX'	,'BcffzyHn84r'	,'Bckqbxan12I'	,'Bcp5Y72HSQj'	,'Bc2sDfHnsDn'	,'BdLm1_JH1H5'	,'BdTNBj-HMd2'	,'Bdn0gMln1p3'	,'BdvWrPlH5qB'	,'Bd3HH2-HtYe'	,'Bd-za5AnKee'	,'BeLpd8Nnp4s'	,'BeOYSgoH3Tc'	,'BeWDwWZH1gV'	,'BegY5IxHKHs'	,'BeqnN5rHAcM'	,'Bev0i6fHrvT'	,'Be1KvhQnxWu'	,'Be_HB6PnZ4q'	,'BfBqB4NHmcl'	,'BfJjM8TnFaR'	,'BfWSflIH6WD'	,'Bfl07CRH2Ap'	,'Bf1ViPRnOs9'	,'Bf9DdsGH8WQ'	,'BgHVc54g-xx'	,'BgUN9x0gg7J'	,'BgZWJg9AJLx'	,'Bgb345vg2N4'	,'BghCHe5AtsP'	,'BgmP-2XAVWU'	,'BgwMdmpHLdC'	,'Bg4MyKEHU-a'	,'Bg7Cu6Gnr6a'	,'Bg9KL3KHbvI'	,'Bg_pfDYnS50'	,'BhCS23mHbS3'	,'BhE4zqUHqT0'	,'BhUagB9HYw-'	,'BhcakUtAoh9'	,'BhhPUEmgaSi'	,'Bh1zGNuABbe'	,'BiE0v17APtK'	,'BiFjkacABog'	,'BiH8pUyg66A'	,'BiH84TbAsMk'	,'BiKZwKTAE4I'	,'BiK6dFXgi1L'	,'BiNIwvTAdMz'	,'BiNhASGAqS6'	,'BiXfiIHAAxd'	,'BiaMUlBA04T'	,'Bife--7g0M1'	,'BimmTFzAKLn'	,'BipYUajgcAr'	,'BisEwh1gjCL']
 #clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
 #clubs = {"wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
-#clubs = {"prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
-clubs = {"rudas": shortcodes_rudas}
-
+clubs = {"prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
+# errors = ["Bdm-yeph7pX","Bdm-dHoBJzC","kvABh1AaVO","BiFJFKYhVuY","Bhr5O7yhbdm","BhehngpBmbn","Bh7IE-3B7U5","BiibmbABbp0","BikoaIGglxx","BhNYtRHFFqb","BhMpnCcF5De","BgZGnGZHSYj","Bfy7NTYFlAf"]
 # COMPLETE
 #file = open("data_rudas.csv","w")
 #file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, IS_VIDEO, VIDEO_VIEW_COUNT\n")
@@ -255,16 +254,16 @@ for club in clubs:
 		try:
 			single_post_comments(code, file_posts, file_comments, file_likes)
 		except:
-			errors[code] = sys.exc_info()[0]
-			print("Error on:", code)
+			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type
+			print("Error on:", code, club)
 			print(str(sys.exc_info()[0]))
 	file_posts.close()
 	file_comments.close()
 
 print(errors)
-file_errors = open("outputs2/errors.csv", "w")
-file_errors.write("SHORTCODE, ERROR\n")
+file_errors = open("outputs3/errors.csv", "w")
+file_errors.write("SHORTCODE, CLUB, ERROR\n")
 for key, value in errors.items():
-	file_errors.write(key + ', ' + str(value))
+	file_errors.write(key + ', ' + str(value[0]) + ', ' + str(value[1]))
 	file_errors.write("\n")
 file_errors.close()

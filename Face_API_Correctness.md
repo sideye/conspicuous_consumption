@@ -17,9 +17,9 @@ Out of a sample of 50 profile picture images on Instagram verified manually by m
 ## Accuracy Stats
 - Profile pictures with complete faces: 36/50 = 72%
 - Male Female ratio out of all profile pictures w/ complete faces: 64% vs 36%*
-- Male recall rate: 3/23 = 13%
-- Female recall rate: 6/13 = 46%
-- Overall recall rate: 9/36 = 25% (recall: out of all instances, how many were correctly ID'd)
+- **Male recall rate: 3/23 = 13%**
+- **Female recall rate: 6/13 = 46%**
+- **Overall recall rate: 9/36 = 25%** (recall: out of all instances, how many were correctly ID'd)
 - Overall precision: 100% (precision: out of all male/female classifications, how many were correct in classifying a male/female) 
 
 <sub><sup>Note: Actual female like-post % should be slightly higher, many times their profile pictures were technically true negatives as they faced away from the camera.</sup></sub>
