@@ -1,4 +1,5 @@
-5/28
+# Progress Log
+## 5/28
 
 Overall, I came in expecting quick success in scraping instagram for all sorts of data, but I soon realized that this was much harder than I had imagined. I estimate I put in about 8-10 hours looking into this, and I have to say that the results are not as successful as I would have liked. 
 
@@ -11,7 +12,7 @@ I mainly focused on getting post shortcodes this week:
 - A possible PHP solution (https://gist.github.com/cosmocatalano/4544576). I took a quick look into this and it never halted on my end. I have no experience with PHP at this moment, but I could look into this.
 
 
-6/10
+## 6/10
 
 Overall, I've modified the code to scrape comments. I think the URL extension trick scrapes in exactly the first 40 comments.
 
@@ -37,7 +38,7 @@ Next steps
 - Determine how to scrape likes.
 
 
-6/17
+## 6/17
 
 Completed:
 - Modified table schema into 2 tables as discussed, 1 table purely for posts and another for comments. Both tables can be joined on shortcodes. 
@@ -56,7 +57,7 @@ Next steps
 - Look into Microsoft face APIs to perhaps to gender + face prediction based on instagram profile photos
 
 
-6/24
+## 6/24
 
 Next steps
 - Logging for errors?
