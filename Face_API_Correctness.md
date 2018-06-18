@@ -8,7 +8,7 @@ Out of a sample of 50 profile picture images on Instagram verified manually by m
 - There were no incorrect classifications, i.e. no gender mixups.
 
 A quick explanation for each term:
-- False negative male/female: a complete male/female face exists facing the camera, but the classifier did not identify him/her. Notably, men wearing hats had a very high false negative rate. Here are some examples of false negatives: 1, 2, 3, 4.
+- False negative male/female: a complete male/female face exists facing the camera, but the classifier did not identify him/her. Notably, men wearing hats had a very high false negative rate.
 - True negative: profile picture did not have a whole face facing the camera and no face was classified. Note that someone facing away from the camera, a partial face being in the picture, or being too far away from the camera counts as a true negative.
 - True positive male/female: correct classification of a male/female.
 
