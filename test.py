@@ -1,6 +1,9 @@
 import requests
 import json
 
+# Get started guide: https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/python
+# Documentation: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+
 params = {
 	'returnFaceId': 'true',
 	'returnFaceLandmarks': 'false',
@@ -17,12 +20,10 @@ URL = 'https://westus.api.cognitive.microsoft.com/face/v1.0/detect'
 # URL = URL + param_string
 # print(URL)
 
-data = {'url': 'https://scontent-sjc3-1.cdninstagram.com/vp/e578e45b2c00d026fc363ee2d44bedb1/5BB817E8/t51.2885-19/s150x150/34611418_280277852713481_1217678594839412736_n.jpg',}
+data = {'url': 'https://images.wbbjtv.com/wp-content/uploads/2016/03/tree.jpg',}
 
-response = requests.post(URL, headers = headers, json = data)
+response = requests.post(URL, params = params, headers = headers, json = data)
 
 response_json = json.loads(response.content.decode('utf-8'))
-print(json.dumps(response_json, indent = 2, sort_keys = True))
-
-
-
+print(response_json)
+#print(response_json[0]["faceAttributes"]["age"])

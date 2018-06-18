@@ -11,7 +11,7 @@ I mainly focused on getting post shortcodes this week:
 - A possible PHP solution (https://gist.github.com/cosmocatalano/4544576). I took a quick look into this and it never halted on my end. I have no experience with PHP at this moment, but I could look into this.
 
 
-6/6
+6/10
 
 Overall, I've modified the code to scrape comments. I think the URL extension trick scrapes in exactly the first 40 comments.
 
@@ -37,7 +37,7 @@ Next steps
 - Determine how to scrape likes.
 
 
-6/10
+6/17
 
 Completed:
 - Modified table schema into 2 tables as discussed, 1 table purely for posts and another for comments. Both tables can be joined on shortcodes. 
@@ -54,3 +54,10 @@ Issues resolved/need to be resolved:
 Next steps
 - Look into solutions that allow us to scrape more likes
 - Look into Microsoft face APIs to perhaps to gender + face prediction based on instagram profile photos
+
+
+6/24
+
+Next steps
+- Logging for errors?
+- 

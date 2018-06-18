@@ -32,7 +32,7 @@ def single_post(shortcode, file):
 	file.write('\n')
 
 
-def single_post_comments(shortcode, file_posts, file_comments):
+def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 	url = 'https://instagram.com/p/' + shortcode + '/?__a=1'
 	r = requests.get(url)
 
@@ -43,7 +43,7 @@ def single_post_comments(shortcode, file_posts, file_comments):
 
 
 	#I. Write Post
-	#Basic details 
+	#Basic details: ID, shortcode, like count, comment count, time posted
 	post_details = node['id'] + ', ' + node['shortcode'] + ', ' + str(node['edge_media_preview_like']['count']) + ', ' + str(node['edge_media_to_comment']['count']) + ', ' + datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S') + ', '
 	
 	#Caption
@@ -65,6 +65,12 @@ def single_post_comments(shortcode, file_posts, file_comments):
 	likes_string = ""
 	for like in node['edge_media_preview_like']['edges']:
 		likes_string += like['node']['username'] + " "
+		age, gender = detect_face(like['node']['profile_pic_url'])
+		if age == None and gender == None: #No face in picture
+			file_likes.write(node['shortcode'] + ', ' + like['node']['username'] + ', , ,' + like['node']['profile_pic_url'])
+		else:
+			file_likes.write(node['shortcode'] + ', ' + like['node']['username'] + ', ' + str(age) + ', ' + str(gender) + ', ' + like['node']['profile_pic_url'])
+		file_likes.write("\n")
 	post_details += likes_string + ', '
 
 	#Scrapes caption for hashtags and mentions
@@ -113,6 +119,31 @@ def single_post_comments(shortcode, file_posts, file_comments):
 		file_comments.write(comment_details)
 		file_comments.write('\n')
 
+def detect_face(url):
+	"""
+	Returns age and gender of the first face in URL as a tuple. If no face exists, returns (None, None)
+	Uses Microsoft Cognitive Services' face API. 
+	Get started guide: https://docs.microsoft.com/en-us/azure/cognitive-services/face/quickstarts/python
+	Documentation: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
+	"""
+	params = {
+		'returnFaceId': 'true',
+		'returnFaceLandmarks': 'false',
+		'returnFaceAttributes': 'age,gender',
+	}
+	headers = {
+		'Content-Type': 'application/json',
+		'Ocp-Apim-Subscription-Key': '875ba7bdf8df47da919b047314b97ca9',
+	}
+	server = 'https://westus.api.cognitive.microsoft.com/face/v1.0/detect'
+	image = {'url': url,}
+	response = requests.post(server, params = params, headers = headers, json = image)
+	response_json = json.loads(response.content.decode('utf-8'))
+	try:
+		return response_json[0]["faceAttributes"]["age"], response_json[0]["faceAttributes"]["gender"]
+	except:
+		return None, None
+
 
 #Put your shortcodes in the next line in the following format shortcodes = ['Bg9WTITBE2N', 'BfnwmP2hY4d', 'BeD0vn7h-7E']
 #shortcodes_rudas = ['BhJRE1PhUdf'	,'BfnwmP2hY4d'	,'BeD0vn7h-7E'	,'Bd-xJ_uhkk8'	,'Bd-wzgqhVdS'	,'Bd7qd1SBqrX'	,'Bds8eh4hitz'	,'BdpumcqBRVa'	,'BdnalRXBOc1'	,'Bdm-yeph7pX'	,'Bdm-dHoBJzC'	,'Bdm8LCaBbfB'	,'Bdm8Eu-h82e'	,'BbM87AQBw8d'	,'BbIDA1JBAp7'	,'BbH2F04hZNG'	,'Ba9iUYWhZCP'	,'Ba9fzTUhwz6'	,'BaxkbUGhkr3'	,'BaswsnXhNpa'	,'BaqUJ5QBgcJ'	,'BahAKKFhkTE'	,'Bag2EDjhtWQ'	,'BZsn7dnBbIh'	,'BZWuXHYjbWv'	,'BZO2jEEBWuX'	,'BZJ4m-yhBIt'	,'BZGwksQh7ZB'	,'BY7-WI4j99t'	,'BYRXCs0hxQn'	,'BU35WRhDLn9'	,'BUldRqajPs4'	,'BUjkOjsjfj2'	,'BUcItrrhS4I'	,'BTi2tgohBZK'	,'BTSR96MhzeP'	,'BTSADitBiBe'	,'BTRUHr5hoKY'	,'BTGKNwehELB'	,'BSmRRJvhOC2'	,'BR-j8XDBsdH'	,'BR1E0TAhYVI'	,'BQ_G1hDBnw-'	,'BQvn8DoBSAK'	,'BQbBl8RgF6P'	,'BP5oir7A-YM'	,'BP5ocbKARN-'	,'BP5obMWApwQ'	,'BPqMTNBgSKt'	,'BPqMRs5g40x'	,'BPqMQQvgEJw'	,'BPXzK8wAKRz'	,'BPXzIJQg8_g'	,'BPVOK-JAFuZ'	,'BPVOJiLgzQt'	,'BPGE1qagwZG'	,'BPGEvmQgi0y'	,'BPGEuQkgVLY'	,'BOniGSbAEsj'	,'BOniEMxg3Kc'	,'BOfMx_2Ak2B'	,'BOfMwvGAUul'	,'BOfMutEANga'	,'BOfMtd_Ae0A'	,'BOVUG3ig066'	,'BOVUFZ1AxbV'	,'BN4pyqWgLlR'	,'BNuXPR3AD9L'	,'BNuXNn_A4Dv'	,'BNfCyWWgBzu'	,'BNfCv_NgF0l'	,'BNcgnHugtQF'	,'BNcgjk2Aicp'	,'BNZyLzzge-1'	,'BNZyGTWAA1y'	,'BNKXZi_g9-O'	,'BNKXX_TAnU4'	,'BNIHCwbgqS1'	,'BNIHBuog0bs'	,'BNCmXWSgg_i'	,'BM4cuHOgX71'	,'BM4csjrgcjE'	,'BM4crxSAyjo'	,'BMzXvNQAoLm'	,'BMzXsZ0g8FQ'	,'BMrfrQnA72W'	,'BMrfqMqAiNS'	,'BMmU0xeA_U4'	,'BMmUy99Ak-2'	,'BMmUxc0gVWH'	,'BMeIYdOAFvG'	,'BMeIWc2gQnD'	,'BMeITOCgUIp'	,'BMeIQ-0A101'	,'BMUbYV9Au2s'	,'BMUbWShArG3'	,'BMRhEuXgkox'	,'BMRgrf0AY4k'	,'BMRglcoAvOV'	,'BMRgbdyAgN5'	,'BMRgNaNAD8G'	,'BMRgEcXgP6n'	,'BMRf7cdABfe'	,'BMRfzfcAI42'	,'BMRfwDlABGA'	,'BL_22b9AkTq'	,'BL_21XcgeN3'	,'BL_2zuMAH2K'	,'BL_2xwfAKBO'	,'BL_2vZJgS2p'	,'BL1WimYAt-y'	,'BLwNX00A3ek'	,'BLwNG7-gO80'	,'BLtzttRgyf0'	,'BLs8KIzASZe'	,'BLs7rdqAmhx'	,'BLs7i0eA34U'	,'BLs7XjqAp9m'	,'BLoelTygRJm'	,'BLZBi3-AoEs'	,'BLO7a-hg-9R'	,'BLJrGaag9Gh'	,'BLJqp3LAwtw'	,'BLJqSQagCPo'	,'BLEQcGHAfKm'	,'BLEP22TgA3M'	,'BLEPjDYgWth'	,'BK8xcSqgbQV'	,'BK8xPTogDyB'	,'BKyUNSjgOF3'	,'BKyT_o7gmTu'	,'BKyTg5QgrXL'	,'BKyTIw8Az1x'	,'BKyTBoxApEa'	,'BKyS4KigAtW'	,'BKySu5WgJIo'	,'BKySic4AHrf'	,'BKq40Lfgvo7'	,'BKq4p0_A2Re'	,'BKq4YWiAIy4'	,'BKq4O4DA1jF'	,'BKl4OioAmfE'	,'BKkL4evgmDi'	,'BKjEUHPgoTI'	,'BKgg5zTA5uC'	,'BKYzZsWAYLV'	,'BKVlOGBg9-f'	,'BKVkDq2gDST'	,'BKVj2hNAdn_'	,'BKVjRRogyiT'	,'BKVjIhfgKgX'	,'BKVi_xfgXhp'	,'BKVi2i3gfnJ'	,'BKVitx5gSjS'	,'BKRALb5gV2S'	,'BKQu-ijAroW'	,'BKQuXJ4AKPX'	,'BKQuMU6gEUc'	,'BKOV2TLAqQg'	,'BKGx9XlgCNi'	,'BKGxx7HgXZb'	,'BKD-_wPAkCB'	,'BKD-00zA9P1'	,'BKD-tEngE5l'	,'BKA9mNDj26d'	,'BKA9SvAgwWZ'	,'BKA9IVsAhX9'	,'BKA86JVgSrT'	,'BJ7pW2pA62h'	,'BJ7ov52g_xJ'	,'BJ7nZX4ANGR'	,'BJ7nNviAIzU'	,'BJ7nIX8AByl'	,'BJ7nAa-AsaM'	,'BJz34S5A5SM'	,'BJzxLOYAIW_'	,'BJzxKgMglTy'	,'BJzxCUdASiC'	,'BJzwx3lgjRW'	,'BJue8OnAZHG'	,'BJuex8hg4Zb'	,'BJuebLwg-y4'	,'BJueNwLAPLd'	,'BJud2McAZFN'	,'BJs86dlgN3a'	,'BJs8t5rg1tm'	,'BJs8jvBgV1l'	,'BJs8YNIAvh8'	,'BJqL8usAmI2'	,'BJqLvBkgIxR'	,'BJqLRjoAhQb'	,'BJoH5S5AgYT'	,'BJm6QodgzEq'	,'BJm5qcZAMS4'	,'BJm5VYqgqwA'	,'BJmys7cABch'	,'BJlEHOVAqgk'	,'BJlDz1FAZpL'	,'BJfYjGoAcaU'	,'BJfYB2fA38B'	,'BJfXZOggyKa'	,'BJVBQhGgKi0'	,'BJLxDO-ANWF'	,'BJLwvVWAvxT'	,'BJLwafOAD7v'	,'BJLeehHApTB'	,'BJLecrPg-FZ'	,'BJLeFuggbwv'	,'BJLeAahAIs5'	,'BJLd2VvAaqO'	,'BJLdq9FgnNo'	,'BJI1udMgykb'	,'BJGVdDiA04o'	,'BJDnmAdgRXe'	,'BJDniBQgOi7'	,'BJDne_rg2ny'	,'BJDnNR0A69M'	,'BJDmnsdgcSa'	,'BJDmZLYA0zX'	,'BJDmMvlALRl'	,'BJDlzWwg03C'	,'BI8RzXUgOjv'	,'BI8RclPAo2E'	,'BI8Q_cFgW-G'	,'BI8QjnXAwKu'	,'BI5e4Q2gERT'	,'BI5esbxg1Iq'	,'BI5elV2g625'	,'BI5eg8_gNx7'	,'BI5ec8iAQZL'	,'BI0m17SAiZB'	,'BIxMC_7gtLW'	,'BIxL_0UAnmp'	,'BIxL2mtA61f'	,'BIxLn8rAGqn'	,'BIxLiv7g9Gv'	,'BIxLcpYA0Gb'	,'BIxLSiRAyJ8'	,'BIu0Pb2ArjM'	,'BIt9xIrgerW'	,'BIt1E07AeSz'	,'BInrduqAGMy'	,'BInrFbFA6jB'	,'BInrAnJgEot'	,'BInq7yPgBvr'	,'BInq3V_g0ta'	,'BInqs2NA0Kn'	,'BInqk4SAJXJ'	,'BInqcUUgeln'	,'BInqHNFA-3f'	,'BInNBO9gU8i'	,'BIicIIJAa13'	,'BIf3eMYg4jk'	,'BIf3Q82ATB0'	,'BIf3HABgZCc'	,'BIf2qRbgSed'	,'BIf2f99g3m4'	,'BIf19cXgzTe'	,'BIf1q46gjfw'	,'BIf1dw4AWia'	,'BIepMYmAQmD'	,'BIdTSkJg3AB'	,'BIdTPIngDLb'	,'BIdTD6cAONa'	,'BIdS_PsAPEM'	,'BIdSy1dAXv3'	,'BIdSoB9gzPT'	,'BIdShMfAHZ5'	,'BIdSZrngMr-'	,'BIdSNp6g_sV'	,'BIb6Py0Arkv'	,'BIX-eSCA29z'	,'BIX983wgiQG'	,'BIX9KAeg96v'	,'BIVea7rAxVm'	,'BIVeVJ7ghS8'	,'BIVeLZFATt9'	,'BIVeDrigXvQ'	,'BIVd13UgYUs'	,'BIVdxKDAZ4J'	,'BIVdsHhgelw'	,'BIVdl37AERK'	,'BIVdf0MgXzq'	,'BIVdR11giCk'	,'BIVdM4tAs0N'	,'BIVSIQHADMY'	,'BIUd4hvAw7-'	,'BIQVX55A2Vx'	,'BIP0vCzgcTF'	,'BIPFL6fgSh3'	,'BILIlQgAewO'	,'BILIbo9AUiK'	,'BILIYA4APqA'	,'BILH4X8AyXO'	,'BIIVkDxAwV_'	,'BIFEyaWA6VL'	,'BIDTm3eAhbt'	,'BIDTe1YgJp8'	,'BIDTVwpglsr'	,'BIDTSp_AN9L'	,'BIDSnSaAXbu'	,'BIDShz5ABYJ'	,'BIDSaF0AQoS'	,'BIDSU0eAADn'	,'BIDSMh_gOc3'	,'BIDSJo-AJTV'	,'BIC4Po2AZ50'	,'BICTeZvAksC'	,'BICOFPvg0S_'	,'BH9cTkoAyVA'	,'BH7vNKkgHlx'	,'BH6ezEagK7P'	,'BH6eYdrAoA6'	,'BH6eSAdAM9J'	,'BH6ePF8AySh'	,'BH6eImeA91z'	,'BH6eBT6gkRY'	,'BH6dptBAg1R'	,'BH6dkgjgjgZ'	,'BH6ddU0gBy6'	,'BH5n1shgJxU'	,'BH28A-WgfTM'	,'BH27ye3A0qN'	,'BH27mz_AC5e'	,'BH27e4_gC1R'	,'BH27WESg4u4'	,'BH2gG7kgNLd'	,'BH2f6t6AYMW'	,'BH2fwUSAy_P']
@@ -126,9 +157,9 @@ shortcodes_prysmCH = ['Bi0SFFHHyaL'	,'Bi0A-5TlNSc'	,'Bixa3bYlalU'	,'BixNj4rHjZX'
 shortcodes_cavesduroyST = ['3B8LmzhNAZ'	,'3e3HoAhNCG'	,'3e4TKOhNEc'	,'31S2ldhNDk'	,'4m3-UwhNDS'	,'468cjSBNBh'	,'5OwG_-BNDm'	,'5aEPpNBNMg'	,'58AcYWBNFB'	,'5-QJDyBNLh'	,'6VnyqxhNNP'	,'6ial93BNN5'	,'6ka0CahNBj'	,'6qSgQJBNHZ'	,'7OMPdzhNA0'	,'7xyKP0hNMl'	,'8AqgViBNEZ'	,'8OpYM4hNLU'	,'9O2b08hND8'	,'9b3OVlBNHG'	,'BAUm0o0BNAF'	,'BAmn7hYhNAg'	,'BBNr1iXhNCX'	,'BB5zRqhhNJH'	,'BC05JarhNDP'	,'BC89x-ZhNLH'	,'BDb5MouBNN_'	,'BEjjBfyhNIu'	,'BEl5MhXBNBk'	,'BFEtYIiBNMO'	,'BFHwTGQhNKK'	,'BFMcpJNBNHz'	,'BFWmSrohNKW'	,'BFYn4nDhNPt'	,'BFbvn0ABNIK'	,'BFgpMIFhNPh'	,'BFmnpNOBNAG'	,'BFpJSbhBNJl'	,'BFuEHZxhNHq'	,'BF64PzpBNGG'	,'BF87hrVBNIp'	,'BGPoxHEhNBw'	,'BGhtNIWhNNH'	,'BGmq3nuhNMk'	,'BGw1udJhNHV'	,'BGzuBS1BNG6'	,'BG2cJnlBNOU'	,'BHFezwph-pe'	,'BHF_DV5BmlJ'	,'BHXvYUaBR9a'	,'BHX8QosBCKo'	,'BHYGckSBZ3w'	,'BHaaKCVhrvH'	,'BHh7IpbhFo0'	,'BHp0X7rhv00'	,'BHsmKJvBos0'	,'BHxnptpBnhG'	,'BH0YPcLAgZz'	,'BH2xWvhB6oN'	,'BH7uoDgBLov'	,'BH-su24hflL'	,'BIBBphbBu96'	,'BID3ja8g6Uk'	,'BIFcZQpBKHT'	,'BIGGpfuAtog'	,'BIPiOfHBhWj'	,'BIX07elhY0U'	,'BIad9UZBftR'	,'BIaem8Uh1hC'	,'BIa_zIqhcX1'	,'BIdSFoAhxEC'	,'BIdbFeaBdFh'	,'BIe53fbh3dK'	,'BIf32AbhHfa'	,'BIf4902hC0f'	,'BIgPgH0haVT'	,'BIiar6oBmDb'	,'BIkbwodBFH9'	,'BIlCQX4hd1-'	,'BIlVPoXh8er'	,'BInq3NkBPub'	,'BIqPBPwBMt8'	,'BIsvXMphEuR'	,'BIvmTm2BuQn'	,'BIvnMj7BnmW'	,'BIx-I5fBis-'	,'BIyIy_MhjWr'	,'BI0hkW6B5XO'	,'BI0iaCghle3'	,'BI0r2NKh0XB'	,'BI3E5FUhKBI'	,'BI5w4T4hfPz'	,'BI5yB4JBJhf'	,'BI7-Si5hXvS'	,'BI8S79nhVUH'	,'BI984TsBPfi'	,'BI-yVOMhUdP'	,'BJBUM46BJnT'	,'BJEKClCBWBt'	,'BJERU_mhu0q'	,'BJGApDuhpdy'	,'BJGlSloht5J'	,'BJJUht5hRHO'	,'BJLvRnrhrNb'	,'BJL4xIFBBTT'	,'BJONKf_hd_T'	,'BJOeRmCh4Uy'	,'BJQvRNIhjZT'	,'BJUy2JzBGdz'	,'BJV3tUZBJfq'	,'BJWF1VdBXX3'	,'BJXSwNIhOgJ'	,'BJYHCp3BPbL'	,'BJYLoSahiQm'	,'BJYyeTOhWY_'	,'BJbPcBOhyJN'	,'BJbUrm0hb1m'	,'BJd4zbwhX-9'	,'BJd6dYAh5cd'	,'BJgTZfTBDKU'	,'BJi9U7fBDUF'	,'BJlD5Z_Brr6'	,'BJm2cTEBpJg'	,'BJoBJm4BavH'	,'BJoDDDGh4MO'	,'BJoRDqah2w6'	,'BJoWiorBLuK'	,'BJs7VpkhePy'	,'BJ2v9ZrBzMa'	,'BJ3ZYMMhMAl'	,'BJ8uFp3h1N2'	,'BJ_RPATB2qn'	,'BKJlRwrBo-p'	,'BKL95Tbhfcj'	,'BKOUg89B6Ba'	,'BKWkUQtBXKz'	,'BKeUGsLhdtt'	,'BKefE9qBEMo'	,'BKegMuEh58J'	,'BKgbIjjB00g'	,'BKg9N2cBF_M'	,'BKvGkhJBCKg'	,'BKv8elRhXx9'	,'BKwWNqJBN3T'	,'BKxu-VwhdQ0'	,'BK3lXwOhh1n'	,'BK7-qH6BPGN'	,'BK_DsbmBmOJ'	,'BLCl58EhfPW'	,'BLMbh7sBYJ8'	,'BLOwF-HhnbZ'	,'BLg4XoshTjU'	,'BLjb69-BnlC'	,'BL_rjLuBnoj'	,'BMCVJZXB6e6'	,'BMKWhN0BJpg'	,'BMSKLTzhzU0'	,'BMcQG0xB9rl'	,'BMmUTPRBwiX'	,'BMrcYtuBJwm'	,'BNAQTGEBBur'	,'BNM7FKMhAmO'	,'BNhmMjQB1qL'	,'BNm36ZPBRtu'	,'BNppNQ2h3cP'	,'BNuj1NkhBq0'	,'BN2U0p3BUNC'	,'BN-DLj6hcTJ'	,'BN-SrHeBwKj'	,'BOIfC8JB-Nh'	,'BONvZd6hZOO'	,'BOYAiisBdc1'	,'BOfm6EXBeg4'	,'BOiDdw1Bkro'	,'BOkmFQ0hjNX'	,'BOprTGbh4cl'	,'BOr5Uc2BEzL'	,'BOswHathYgT'	,'BO29Kslhnwb'	,'BO5plzNBd1x'	,'BPBBR13BwVc'	,'BPEFeF1BMsK'	,'BPIwSIyhgkM'	,'BPLX_1VhnMY'	,'BPQvv20Bpzc'	,'BPapd9MhdEp'	,'BPf8ZYihHBw'	,'BPilqvOhvFE'	,'BPlKNSABdWJ'	,'BPnxloghj05'	,'BPx2hnKh5r1'	,'BP5wTk8hN98'	,'BP8kFgDhfab'	,'BQBU_M4Bcfe'	,'BQD6JYoBx1R'	,'BQGq6-BFaWm'	,'BQJTmu4Futf'	,'BQQw3leltwq'	,'BQTZLVcFZJT'	,'BQV3TG0lHpt'	,'BQbNw2zloQp'	,'BQdrEmcFdBL'	,'BQlcEdDhmtE'	,'BQn4fV8FUap'	,'BQqVkuehfqx'	,'BQtI_gEB2WH'	,'BQ03Q7_BhmF'	,'BQ3be2cBuNv'	,'BQ6RkOFlqSO'	,'BQ8iVEHhG-H'	,'BQ8iiDgB8FN'	,'BQ_T5gMBY8U'	,'BRBu4MmB0Iu'	,'BREkOMPBKdd'	,'BRG2dn2hTow'	,'BRJvaUVh2GU'	,'BRLLQFkBloz'	,'BRO2VgkhVgQ'	,'BRWnlJfBazQ'	,'BRZIzs0BA8p'	,'BReShI1B-Fc'	,'BRg5cK4Bn1N'	,'BRomZeaBdlw'	,'BRttBctBg0J'	,'BRwI8s-h11P'	,'BRytg9ZBR2K'	,'BR4D04ghOy_'	,'BR9JwgvhGoF'	,'BSHOorbB0lK'	,'BSRti1yBZw3'	,'BSUCwBEBSZU'	,'BSW5xpeBorj'	,'BSjo6Nuhu04'	,'BS4Cc0xBsJl'	,'BS9IrB_hjh5'	,'BTUlQN_B5H7'	,'BTeyR0ABZg2'	,'BTo848JByV8'	,'BTxC6KWBGva'	,'BT14HdKhB9k'	,'BT4bfoohLd1'	,'BT7CRsGFuVG'	,'BT7OzJTF8Hr'	,'BT_jDMNhMds'	,'BUNVxV-Bd_U'	,'BUUiBw5BggV'	,'BUVYqOPBOqZ'	,'BUaLXGXhFiX'	,'BUfazk3BbeY'	,'BUhs9VohNAG'	,'BUkczevBy5P'	,'BUkd-hFhN0K'	,'BUmRCwphxfQ'	,'BUnNgDghzVt'	,'BUnUKrMBWEN'	,'BUnVSVUBm7d'	,'BUr0AHYhSV1'	,'BUua3mPBzc9'	,'BU2gwDUhf2d'	,'BU5IbhuhcS5'	,'BVIsgV7n1Li'	,'BVLD1unn-Ji'	,'BVNW8MzHv9J'	,'BVap4wyHaEf'	,'BVdTFsfnhci'	,'BVsiFo9nwKR'	,'BVvPiAqHogf'	,'BV-0zJSHKho'	,'BWBHtG4HopU'	,'BWDOOpcnpfj'	,'BWD2Gf3nz3X'	,'BWGfL6xHtBZ'	,'BWIq0D4HdPi'	,'BWLfmJ9H1-d'	,'BWOI8KSnnHu'	,'BWQzJk1Hwvk'	,'BWTRGO0nFub'	,'BWYgKMhnR9e'	,'BWioDvaHUC9'	,'BWladyKnXyj'	,'BWn9PPNH_5K'	,'BWqkIj_nn4H'	,'BWtA0ikH5sy'	,'BWvs_mmnAEC'	,'BW3GZGwHzf6'	,'BW5iKHfny43'	,'BW-rvxBnXU2'	,'BXD2Uw0HDKI'	,'BXGvUgOnQu4'	,'BXJVBaxHp0x'	,'BXL5WotHxCx'	,'BXOihtgnv_C'	,'BXROSGwntCc'	,'BXTpUIbHhLa'	,'BXWUhIEH_pt'	,'BXYff0bnwAe'	,'BXZC8u1n9ie'	,'BXauVGanN0X'	,'BXbhd6rnQge'	,'BXdvXv7HEds'	,'BXgeFGNHTmJ'	,'BXgnk1_n_PP'	,'BXi_SpynSQs'	,'BXoRMzKHop2'	,'BXq4sjknw56'	,'BXtc0zWn0kb'	,'BXwBin0nQE5'	,'BXyrEKIni7G'	,'BXysE6IHGfL'	,'BX1HC4Onx8-'	,'BX3nd0fH4Xy'	,'BX6cj_7HRHD'	,'BX82-zJnJ8S'	,'BX_a9EXnXk8'	,'BYB260yHWzE'	,'BYEgGxMnFtM'	,'BYHPN2qH_tG'	,'BYL5kUWHrsD'	,'BYO9SVSH5Uf'	,'BYRan83Hrpp'	,'BYgz7oTnxxp'	,'BYjRWDZnQcO'	,'BY1MfZHn8y7'	,'BZHLCDMHhtw'	,'BZWfp-VHJ9x'	,'BZZmN43HCVR'	,'BZojYvknqoG'	,'BZrgpP5H9Xy'	,'BZwKaNoHCsm'	,'BZ6tz9JHPgk'	,'BZ9M-ClniZG'	,'BZ9oEy0HtMt'	,'BaJ85BFnmym'	,'BbxeO2HHNC_'	,'Bb4zJEqHHBg'	,'BcAoOvvHz53'	,'BcQd6sGHyDX'	,'BcffzyHn84r'	,'Bckqbxan12I'	,'Bcp5Y72HSQj'	,'Bc2sDfHnsDn'	,'BdLm1_JH1H5'	,'BdTNBj-HMd2'	,'Bdn0gMln1p3'	,'BdvWrPlH5qB'	,'Bd3HH2-HtYe'	,'Bd-za5AnKee'	,'BeLpd8Nnp4s'	,'BeOYSgoH3Tc'	,'BeWDwWZH1gV'	,'BegY5IxHKHs'	,'BeqnN5rHAcM'	,'Bev0i6fHrvT'	,'Be1KvhQnxWu'	,'Be_HB6PnZ4q'	,'BfBqB4NHmcl'	,'BfJjM8TnFaR'	,'BfWSflIH6WD'	,'Bfl07CRH2Ap'	,'Bf1ViPRnOs9'	,'Bf9DdsGH8WQ'	,'BgHVc54g-xx'	,'BgUN9x0gg7J'	,'BgZWJg9AJLx'	,'Bgb345vg2N4'	,'BghCHe5AtsP'	,'BgmP-2XAVWU'	,'BgwMdmpHLdC'	,'Bg4MyKEHU-a'	,'Bg7Cu6Gnr6a'	,'Bg9KL3KHbvI'	,'Bg_pfDYnS50'	,'BhCS23mHbS3'	,'BhE4zqUHqT0'	,'BhUagB9HYw-'	,'BhcakUtAoh9'	,'BhhPUEmgaSi'	,'Bh1zGNuABbe'	,'BiE0v17APtK'	,'BiFjkacABog'	,'BiH8pUyg66A'	,'BiH84TbAsMk'	,'BiKZwKTAE4I'	,'BiK6dFXgi1L'	,'BiNIwvTAdMz'	,'BiNhASGAqS6'	,'BiXfiIHAAxd'	,'BiaMUlBA04T'	,'Bife--7g0M1'	,'BimmTFzAKLn'	,'BipYUajgcAr'	,'BisEwh1gjCL']
 #clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
 #clubs = {"wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
-clubs = {"prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
+#clubs = {"prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
+clubs = {"rudas": shortcodes_rudas}
 
-shortcodes_test = ['BhJRE1PhUdf']
 # COMPLETE
 #file = open("data_rudas.csv","w")
 #file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, IS_VIDEO, VIDEO_VIEW_COUNT\n")
@@ -207,18 +238,21 @@ shortcodes_test = ['BhJRE1PhUdf']
 errors = {}
 for club in clubs:
 	print("Working on", club)
-	file_posts_path = "outputs2/data_" + club + "_posts.csv"
+	file_posts_path = "outputs3/data_" + club + "_posts.csv"
 	file_posts = open(file_posts_path, "w")
-	file_comments_path = "outputs2/data_" + club + "_comments.csv"
+	file_comments_path = "outputs3/data_" + club + "_comments.csv"
 	file_comments = open(file_comments_path, "w")
+	file_likes_path = "outputs3/data_" + club + "_likes.csv"
+	file_likes = open(file_likes_path, "w")
 	file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, USERS_LIKED, TAGS, MENTIONS, HAS_COMMENTS\n")
 	file_comments.write("SHORTCODE, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT, COMMENT_TAGS, COMMENT_MENTIONS\n")
+	file_likes.write("SHORTCODE, USER_LIKED, AGE, GENDER, PROFILE_PIC_URL")
 	index = 1
 	for code in clubs[club]:
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
 		index += 1
 		try:
-			single_post_comments(code, file_posts, file_comments)
+			single_post_comments(code, file_posts, file_comments, file_likes)
 		except:
 			errors[code] = sys.exc_info()[0]
 			print("Error on:", code)
