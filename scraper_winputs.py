@@ -246,7 +246,7 @@ for club in clubs:
 	file_likes = open(file_likes_path, "w")
 	file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, USERS_LIKED, TAGS, MENTIONS, HAS_COMMENTS\n")
 	file_comments.write("SHORTCODE, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT, COMMENT_TAGS, COMMENT_MENTIONS\n")
-	file_likes.write("SHORTCODE, USER_LIKED, AGE, GENDER, PROFILE_PIC_URL")
+	file_likes.write("SHORTCODE, USER_LIKED, AGE, GENDER, PROFILE_PIC_URL\n")
 	index = 1
 	for code in clubs[club]:
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
