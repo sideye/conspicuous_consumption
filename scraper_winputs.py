@@ -43,9 +43,14 @@ def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 
 
 	#I. Write Post
-	#Basic details: ID, shortcode, like count, comment count, time posted
-	post_details = node['id'] + ', ' + node['shortcode'] + ', ' + str(node['edge_media_preview_like']['count']) + ', ' + str(node['edge_media_to_comment']['count']) + ', ' + datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S') + ', '
+	#Basic details: ID, shortcode, like count, comment count
+	post_details = node['id'] + ', ' + node['shortcode'] + ', ' + str(node['edge_media_preview_like']['count']) + ', ' + str(node['edge_media_to_comment']['count']) + ', ' 
 	
+	# Datetime and weekday
+	post_details += datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).strftime('%Y-%m-%d %H:%M:%S') + ', '
+	weekdays = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
+	post_details += weekdays[datetime.datetime.fromtimestamp(int(node['taken_at_timestamp'])).weekday()] + ', '
+
 	#Caption
 	try :
 		caption = str(node['edge_media_to_caption']['edges'][0]['node']['text'])
@@ -238,30 +243,30 @@ clubs = {"prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
 errors = {}
 for club in clubs:
 	print("Working on", club)
-	file_posts_path = "outputs3/data_" + club + "_posts.csv"
+	file_posts_path = "outputs4/data_" + club + "_posts.csv"
 	file_posts = open(file_posts_path, "w")
-	file_comments_path = "outputs3/data_" + club + "_comments.csv"
+	file_comments_path = "outputs4/data_" + club + "_comments.csv"
 	file_comments = open(file_comments_path, "w")
-	file_likes_path = "outputs3/data_" + club + "_likes.csv"
+	file_likes_path = "outputs4/data_" + club + "_likes.csv"
 	file_likes = open(file_likes_path, "w")
-	file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, USERS_LIKED, TAGS, MENTIONS, HAS_COMMENTS\n")
+	file_posts.write("ID, SHORTCODE, LIKES, NUM_COMMENTS, DATE, WEEKDAY, CAPTION, IS_VIDEO, VIDEO_VIEW_COUNT, USERS_LIKED, TAGS, MENTIONS, HAS_COMMENTS\n")
 	file_comments.write("SHORTCODE, COMMENT_ID, COMMENT_USER, COMMENT_TIME, COMMENT_TEXT, COMMENT_TAGS, COMMENT_MENTIONS\n")
 	file_likes.write("SHORTCODE, USER_LIKED, AGE, GENDER, PROFILE_PIC_URL\n")
 	index = 1
 	for code in clubs[club]:
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
 		index += 1
-		try:
-			single_post_comments(code, file_posts, file_comments, file_likes)
-		except:
-			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type
-			print("Error on:", code, club)
-			print(str(sys.exc_info()[0]))
+		
+		single_post_comments(code, file_posts, file_comments, file_likes)
+		# except:
+		# 	errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type
+		# 	print("Error on:", code, club)
+		# 	print(str(sys.exc_info()[0]))
 	file_posts.close()
 	file_comments.close()
 
 print(errors)
-file_errors = open("outputs3/errors.csv", "w")
+file_errors = open("outputs4/errors.csv", "w")
 file_errors.write("SHORTCODE, CLUB, ERROR\n")
 for key, value in errors.items():
 	file_errors.write(key + ', ' + str(value[0]) + ', ' + str(value[1]))
