@@ -67,6 +67,7 @@ Completed
 	- All errors are of the same type: JSON decoding error. This is generally due to deleted instagram posts, causing the JSON file to be not found.
 - Added column for weekday. 
 - Conducted datetime analysis on clubs' posts. See the "Datetime EDA" python notebook to see more.
+- Fixed spacing error that caused all csv cells/entries to begin with a space. 
 
 Next steps
 - Logging for errors?
