@@ -61,14 +61,15 @@ Next steps
 
 Completed
 - Added Microsoft Face API functionality to identify gender and age of user based on profile picture. Ran this on all users who were the first 10 to like a post, for all posts by clubs Rudas and Oxford. Created a separate file called data_CLUB_likes.csv to store the info of each user who liked a post, which can be found in directory outputs3. 
-	- Estimaed scraping speed: 17 seconds per 10 posts, or ~35 posts per minute.
+	- Estimated scraping speed: 17 seconds per 10 posts, or ~35 posts per minute.
 	- Conducted some validation to see accuracy (precision and recall) of the face API. See the Face_API_Correctness.md file for details. 
 - Added club information for shortcodes that encountered an error in the script and updated all errors.csv files. The new errors.csv in each output directory now has 3 columns: shortcode, club, and error type.
 	- All errors are of the same type: JSON decoding error. This is generally due to deleted instagram posts, causing the JSON file to be not found.
-- Added column for weekday. 
 - Conducted datetime analysis on clubs' posts. See the "Datetime EDA" python notebook to see more.
-- Fixed spacing error that caused all csv cells/entries to begin with a space. 
+- Added column for weekday. 
+- Fixed spacing error that caused all cells/entries to begin with a space. 
+- Copied the entire repo to an AWS Lightsail VM, and rescraped data to fix spacing error and include weekday. (Currently in process)
+	- All outputs should be found in the directory "Jun25Outputs"
 
 Next steps
 - Logging for errors?
-- Spacing error
