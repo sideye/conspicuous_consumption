@@ -66,7 +66,7 @@ Completed
 - Added club information for shortcodes that encountered an error in the script and updated all errors.csv files. The new errors.csv in each output directory now has 3 columns: shortcode, club, and error type.
 	- All errors are of the same type: JSON decoding error. This is generally due to deleted instagram posts, causing the JSON file to be not found.
 - Added column for weekday. 
-- 
+- Conducted datetime analysis on clubs' posts. See the "Datetime EDA" python notebook to see more.
 
 Next steps
 - Logging for errors?
