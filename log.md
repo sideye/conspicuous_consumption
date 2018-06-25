@@ -68,8 +68,13 @@ Completed
 - Conducted datetime analysis on clubs' posts. See the "Datetime EDA" python notebook to see more.
 - Added column for weekday. 
 - Fixed spacing error that caused all cells/entries to begin with a space. 
-- Copied the entire repo to an AWS Lightsail VM, and rescraped data to fix spacing error and include weekday. (Currently in process)
+- Copied the entire repo to an AWS Lightsail Virtual Machine to scrape continuously without interruption. Rescraped data to fix spacing error and include weekday. (Currently in process)
 	- All outputs should be found in the directory "Jun25Outputs"
 
 Next steps
 - Logging for errors?
+- Test for time zone by commenting ourselves on a post
+- Look into scraping more likes
+- Analyze robustness of face ID in more detail
+- Look into analyzing user gender based on full name and check accuracy
+	- Synthesize results from face + user full name
