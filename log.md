@@ -73,7 +73,7 @@ Completed
 
 Next steps
 - Logging for errors?
-- Test for time zone by commenting ourselves on a post
+- Test for time zone by commenting on a post
 - Look into scraping more likes
 - Analyze robustness of face ID in more detail
 - Look into analyzing user gender based on full name and check accuracy
