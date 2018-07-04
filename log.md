@@ -78,3 +78,8 @@ Next steps
 - Analyze robustness of face ID in more detail
 - Look into analyzing user gender based on full name and check accuracy
 	- Synthesize results from face + user full name
+
+## 7/4
+- Updated results from the VM can be found in the `Jun25Outputs` directory. Note that the likes csv files are empty as Microsoft face ID was not used during this scrape.
+- Timestamp results: since the datetime is given as a timestamp (i.e. an integer value of the number of seconds since [UNIX Epoch](https://en.wikipedia.org/wiki/Unix_time])), timezone does not matter. Unix Epoch is 00:00:00 1/1/1970 UTC. We simply have to be able to convert the timestamp integer value into the local time and date. 
+- 
