@@ -287,7 +287,7 @@ for club in clubs:
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
 		index += 1
 		try:
-		single_post_comments(code, file_posts, file_comments, file_likes)
+			single_post_comments(code, file_posts, file_comments, file_likes)
 		except:
 			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type
 			print("Error on:", code, club)
