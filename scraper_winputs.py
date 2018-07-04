@@ -71,12 +71,21 @@ def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 	likes_string = ""
 	for like in node['edge_media_preview_like']['edges']:
 		likes_string += like['node']['username'] + " "
-		# age, gender = detect_face(like['node']['profile_pic_url'])
-		# if age == None and gender == None: #No face in picture
-		# 	file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',,,' + like['node']['profile_pic_url'])
-		# else:
-		# 	file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + str(age) + ',' + str(gender) + ',' + like['node']['profile_pic_url'])
-		# file_likes.write("\n")
+		gender = detect_name(like['node']['username'])
+		if gender == 'male' or gender == 'female' or gender == "mostly_male" or gender == "mostly_female":
+			if gender == "mostly_male":
+				gender = "male"
+			elif gender == "mostly_female":
+				gender = "female"
+			file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + gender + ',' + like['node']['profile_pic_url'])
+			file_likes.write("\n")
+		else:
+			age, gender = detect_face(like['node']['profile_pic_url'])
+			if gender == None: #No face in picture
+				file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',,' + like['node']['profile_pic_url'])
+			else:
+				file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + str(gender) + ',' + like['node']['profile_pic_url'])
+			file_likes.write("\n")
 	post_details += likes_string + ','
 
 	#Scrapes caption for hashtags and mentions
@@ -156,7 +165,10 @@ def detect_name(username):
 	r = requests.get(url)
 	profile = json.loads(r.text)
 	full_name = profile["graphql"]["user"]["full_name"]
-	first_name = re.compile('\w+').findall(full_name)[0]
+	try:
+		first_name = re.compile('\w+').findall(full_name)[0]
+	except:
+		first_name = ""
 	gender = detector.get_gender(first_name)
 	return gender
 
@@ -255,24 +267,27 @@ clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetr
 # 	single_post_comments(code, file)
 # file.close()
 
+detector = gender.Detector()
+
+
 errors = {}
 for club in clubs:
 	print("Working on", club)
-	file_posts_path = "Jun25Outputs/data_" + club + "_posts.csv"
+	file_posts_path = "Jul4Outputs/data_" + club + "_posts.csv"
 	file_posts = open(file_posts_path, "w")
-	file_comments_path = "Jun25Outputs/data_" + club + "_comments.csv"
+	file_comments_path = "Jul4Outputs/data_" + club + "_comments.csv"
 	file_comments = open(file_comments_path, "w")
-	file_likes_path = "Jun25Outputs/data_" + club + "_likes.csv"
+	file_likes_path = "Jul4Outputs/data_" + club + "_likes.csv"
 	file_likes = open(file_likes_path, "w")
 	file_posts.write("ID,SHORTCODE,LIKES,NUM_COMMENTS,DATE,WEEKDAY,CAPTION,IS_VIDEO,VIDEO_VIEW_COUNT,USERS_LIKED,TAGS,MENTIONS,HAS_COMMENTS\n")
 	file_comments.write("SHORTCODE,COMMENT_ID,COMMENT_USER,COMMENT_TIME,COMMENT_TEXT,COMMENT_TAGS,COMMENT_MENTIONS\n")
-	file_likes.write("SHORTCODE,USER_LIKED,AGE,GENDER,PROFILE_PIC_URL\n")
+	file_likes.write("SHORTCODE,USER_LIKED,GENDER,PROFILE_PIC_URL\n")
 	index = 1
 	for code in clubs[club]:
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
 		index += 1
-		try: 
-			single_post_comments(code, file_posts, file_comments, file_likes)
+		try:
+		single_post_comments(code, file_posts, file_comments, file_likes)
 		except:
 			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type
 			print("Error on:", code, club)
@@ -281,7 +296,7 @@ for club in clubs:
 	file_comments.close()
 
 print(errors)
-file_errors = open("Jun25Outputs/errors.csv", "w")
+file_errors = open("Jul4Outputs/errors.csv", "w")
 file_errors.write("SHORTCODE,CLUB,ERROR\n")
 for key, value in errors.items():
 	file_errors.write(key + ',' + str(value[0]) + ',' + str(value[1]))

@@ -86,3 +86,9 @@ Completed
 - Added Gender Analyzer based off first name. 
 	- Installed [gender-guessor](https://pypi.org/project/gender-guesser/), a python package that detects first name gender. 
 	- Instagram directly forbids GET requests of profiles through `https://www.instagram.com/<username>/?__a=1`, despite our web browsers being able to access it. Instead, I find a quick API [here](https://stackoverflow.com/questions/48709680/is-it-allowed-to-use-this-link-https-www-instagram-com-username-a-1) hosted on heroku that skirts around this: `https://apinsta.herokuapp.com/u/<username>`.
+	- Current logic to determine gender: uses gender analyzer based off of first name. If the results are "andy" (androgynous name) or "unknown", calls Microsoft Face API to check for gender. If this still does not yield a result, the gender field is blank.
+	- Approximate accuracy: off a trial test of 10 posts, out of the 88 likes, 46 of them had their gender identified. 
+- Pushed the gender analyzer back to the VM to let it run. 
+
+Next steps
+- Another way to determine gender is to scrape more pictures of a user's profile. Generally, the most pictures a profile posts should be of themselves, so examining more images could be a good way to get more data and hence make a better prediction.
