@@ -83,5 +83,6 @@ Next steps
 Completed
 - Updated results from the VM can be found in the `Jun25Outputs` directory. Note that the likes csv files are empty as Microsoft face ID was not used during this scrape.
 - Timestamp results: since the datetime is given as a timestamp (i.e. an integer value of the number of seconds since [UNIX Epoch](https://en.wikipedia.org/wiki/Unix_time])), timezone does not matter. Unix Epoch is 00:00:00 1/1/1970 UTC. We simply have to be able to convert the timestamp integer value into the local time and date. 
-- Installed [gender-guessor](https://pypi.org/project/gender-guesser/), a python package that detects first name gender. 
+- Added Gender Analyzer based off first name. 
+	- Installed [gender-guessor](https://pypi.org/project/gender-guesser/), a python package that detects first name gender. 
 	- Instagram directly forbids GET requests of profiles through `https://www.instagram.com/<username>/?__a=1`, despite our web browsers being able to access it. Instead, I find a quick API [here](https://stackoverflow.com/questions/48709680/is-it-allowed-to-use-this-link-https-www-instagram-com-username-a-1) hosted on heroku that skirts around this: `https://apinsta.herokuapp.com/u/<username>`.
