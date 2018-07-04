@@ -44,10 +44,10 @@ Completed:
 - Modified table schema into 2 tables as discussed, 1 table purely for posts and another for comments. Both tables can be joined on shortcodes. 
 - Changed: if a post had no caption, the data entry for the caption column is now empty (a NaN) instead of "N/A"
 - Added features to scrape tags (proceeding a #) and mentions (proceeding a @) for both comments and posts, so these features exist in both the post and comments tables. Each hashtag or username is separated by a space. 
-- Wrote some simple automation to scrape all clubs in one run. Ran the implementation and wrote the results from scraping all given shortcodes from all clubs in the outputs directory. 
+- Wrote some simple automation to scrape all clubs in one run. Ran the implementation and wrote the results from scraping all given shortcodes from all clubs in the `outputs` directory. 
 	- Estimated scraping speed: ~80 posts per minute. 
-- Added and try-except block to handle errors gracefully. This avoids the JSON decoding error from last week. Often, these posts are posts that were deleted on instagram. All erroring posts' shortcodes and error types (e.g. JSON decoding erorr) are stored and saved into an errors.csv file, which is in the outputs directory, with all other output files.
-- Added a column to scrape the first 10 likes, which is all that is displayed in the JSON file. These results were scraped into the outputs2 directory. (However the error file in that directory is not correct as I had to restart the code halfway, so refer to all errors from the outputs directory).
+- Added and try-except block to handle errors gracefully. This avoids the JSON decoding error from last week. Often, these posts are posts that were deleted on instagram. All erroring posts' shortcodes and error types (e.g. JSON decoding erorr) are stored and saved into an errors.csv file, which is in the `outputs` directory, with all other output files.
+- Added a column to scrape the first 10 likes, which is all that is displayed in the JSON file. These results were scraped into the `outputs2` directory. (However the error file in that directory is not correct as I had to restart the code halfway, so refer to all errors from the `outputs` directory).
 
 Issues resolved/need to be resolved:
 - Some of the video view counts are incorrect with 0 views. This is an error on instagram's part as the source JSON is simply wrong (indicates 0 views) and hence we cannot do much about it. This is something to be aware of when doing data analysis. 
@@ -60,7 +60,7 @@ Next steps
 ## 6/24
 
 Completed
-- Added Microsoft Face API functionality to identify gender and age of user based on profile picture. Ran this on all users who were the first 10 to like a post, for all posts by clubs Rudas and Oxford. Created a separate file called data_CLUB_likes.csv to store the info of each user who liked a post, which can be found in directory outputs3. 
+- Added Microsoft Face API functionality to identify gender and age of user based on profile picture. Ran this on all users who were the first 10 to like a post, for all posts by clubs Rudas and Oxford. Created a separate file called `data_CLUB_likes.csv` to store the info of each user who liked a post, which can be found in directory `outputs3`. 
 	- Estimated scraping speed: 17 seconds per 10 posts, or ~35 posts per minute.
 	- Conducted some validation to see accuracy (precision and recall) of the face API. See the Face_API_Correctness.md file for details. 
 - Added club information for shortcodes that encountered an error in the script and updated all errors.csv files. The new errors.csv in each output directory now has 3 columns: shortcode, club, and error type.
@@ -69,7 +69,7 @@ Completed
 - Added column for weekday. 
 - Fixed spacing error that caused all cells/entries to begin with a space. 
 - Copied the entire repo to an AWS Lightsail Virtual Machine to scrape continuously without interruption. Rescraped data to fix spacing error and include weekday. (Currently in process)
-	- All outputs should be found in the directory "Jun25Outputs"
+	- All outputs should be found in the directory `Jun25Outputs`
 
 Next steps
 - Test for time zone by commenting on a post
@@ -93,3 +93,4 @@ Completed
 
 Next steps
 - Another way to determine gender is to scrape more pictures of a user's profile. Generally, the most pictures a profile posts should be of themselves, so examining more images could be a good way to get more data and hence make a better prediction.
+- Look into scraping more likes
