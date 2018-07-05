@@ -91,6 +91,7 @@ Completed
 	- **Approximate speed**: 10 posts took about 168 seconds. ~3.5 posts per minute. This looks like it's pretty slow. If we had 8000 posts (which is my guess for the number of posts right now), it'd take more than 38 hours to complete.
 - Pushed the gender analyzer back to the VM to let it run. Will analyze my Azure subscription to make sure it doesn't explode in costs. I currently have 200$ of free credit expiring in 12 days, so I plan on using that once our free subscription is exhausted.
 	- Our current free plan allows for 30k free calls to face API, of which we've used about 2k so far. 
+- **Existing issue**: we've maxed out our free requests using this service. They only gave us 5k total, which was not enough to even scrape Rudas' data. 
 
 Next steps
 - Another way to determine gender is to scrape more pictures of a user's profile. Generally, the most pictures a profile posts should be of themselves, so examining more images could be a good way to get more data and hence make a better prediction.
