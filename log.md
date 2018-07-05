@@ -86,12 +86,15 @@ Completed
 - Added Gender Analyzer based off first name. 
 	- Installed [gender-guessor](https://pypi.org/project/gender-guesser/), a python package that detects first name gender. 
 	- Instagram directly forbids GET requests of profiles through `https://www.instagram.com/<username>/?__a=1`, despite our web browsers being able to access it. Instead, I find a quick API [here](https://stackoverflow.com/questions/48709680/is-it-allowed-to-use-this-link-https-www-instagram-com-username-a-1) hosted on heroku that skirts around this: `https://apinsta.herokuapp.com/u/<username>`.
+		- **There is an issue with this API. See below.**
 	- Current logic to determine gender: uses gender analyzer based off of first name. If the results are "andy" (androgynous name) or "unknown", calls Microsoft Face API to check for gender. If this still does not yield a result, the gender field is blank.
 	- **Approximate accuracy**: off a trial test of 10 posts, out of the 88 likes, 46 of them had their gender identified (52%). I have not been able to determine the accuracy of the results yet, so feel free to do so. You can find the file in `Jul4Outputs/data_rudas_likes.csv`. 
 	- **Approximate speed**: 10 posts took about 168 seconds. ~3.5 posts per minute. This looks like it's pretty slow. If we had 8000 posts (which is my guess for the number of posts right now), it'd take more than 38 hours to complete.
-- Pushed the gender analyzer back to the VM to let it run. Will analyze my Azure subscription to make sure it doesn't explode in costs. I currently have 200$ of free credit expiring in 12 days, so I plan on using that once our free subscription is exhausted.
+- ~~Pushed the gender analyzer back to the VM to let it run. Will analyze my Azure subscription to make sure it doesn't explode in costs. I currently have 200$ of free credit expiring in 12 days, so I plan on using that once our free subscription is exhausted.~~ Currently not in use due to existing issue below. 
 	- Our current free plan allows for 30k free calls to face API, of which we've used about 2k so far. 
-- **Existing issue**: we've maxed out our free requests using this service. They only gave us 5k total, which was not enough to even scrape Rudas' data. 
+
+Issues
+- We've maxed out our free requests using this service. They only gave us 5k total, which was not enough to even scrape Rudas' data. 
 
 Next steps
 - Another way to determine gender is to scrape more pictures of a user's profile. Generally, the most pictures a profile posts should be of themselves, so examining more images could be a good way to get more data and hence make a better prediction.
