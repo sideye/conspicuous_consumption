@@ -94,8 +94,8 @@ Completed
 	- Our current free plan allows for 30k free calls to face API, of which we've used about 2k so far. 
 
 Issues
-- We've maxed out our free requests using this service. They only gave us 5k total, which was not enough to even scrape Rudas' data. 
-	- Found a potential solution [here](https://stackoverflow.com/questions/49788905/what-is-the-new-instagram-json-endpoint). Will look into later. 
+- We've maxed out our free requests using this service (I was not aware that there was a limited free amount before maxing it out). There was only 5k total free requests (per IP I think), which was not enough to even scrape Rudas' data. 
+	- Found a potential workaround [here](https://stackoverflow.com/questions/49788905/what-is-the-new-instagram-json-endpoint) that does not require the above API. Will look into later. 
 
 Next steps
 - Resolve existing issue to get user profile JSONs to determine their full names. 
