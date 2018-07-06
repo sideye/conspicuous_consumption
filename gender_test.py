@@ -1,6 +1,6 @@
 import gender_guesser.detector as gender
 import requests
-from bs4 import BeautifulSoup as soup
+from bs4 import BeautifulSoup 
 import json
 import re
 
@@ -21,4 +21,14 @@ def detect_name(username):
 	gender = detector.get_gender(first_name)
 	return gender
 
-print(detect_name("alankliang"))
+#print(detect_name("alankliang"))
+
+
+
+
+r = requests.get('https://www.instagram.com/alankliang/')
+soup = BeautifulSoup(r.content)
+scripts = soup.find_all('script', type="text/javascript", text=re.compile('window._sharedData'))
+stringified_json = scripts[0].get_text().replace('window._sharedData = ', '')[:-1]
+
+print(type(json.loads(stringified_json)['entry_data']['ProfilePage'][0]))
