@@ -102,11 +102,11 @@ Next steps
 - Another way to determine gender is to scrape more pictures of a user's profile. Generally, the most pictures a profile posts should be of themselves, so examining more images could be a good way to get more data and hence make a better prediction.
 - Look into scraping more likes
 
-7/5
+## 7/5
 
 Completed
 - Fixed issue with getting user profile JSONs by using the above workaround.
-- Pushed new script to VM and am now rerunning the script on the VM. Estimated completion: ~1 day continuous running. New outputs will be placed in the `Jul5Outputs` folder. 
+- Pushed new script to VM and am now rerunning the script on the VM. Estimated completion: ~1.5 days continuous running. New outputs will be placed in the `Jul5Outputs` folder. 
 	- See approximate speed above. 
 
 Next Steps
