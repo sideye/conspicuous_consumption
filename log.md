@@ -119,8 +119,9 @@ Next Steps
 Completed 
 - Scraping complete and the results can be found in `Jul5Outputs`. There were 5153 errors out of the total 7655 shortcodes. All errors are logged in the errors file. 
 	- Confirmed that the error does not seem to be reproducible. I can look into this as to why it is; I suspect that the 10 preview likes may change the users each time, or the current workaround is inconsistent.
+	- So far we've used about 10.5k of the 30k free calls on Azure, and we used about 7k calls overnight. With 7655-5153=2502 posts complete, 7000 / 2502 x 5153 = 14.5k calls estimated for the remaining 5153 codes, which we should have enough for. 
 
 Next Steps
-- Determine accuracy of current gender classifier more confidently. 
-- Use pandas to clean out the error file and then rescrape the error'ed out shortcodes.
+- Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
+- Use pandas + Jupyter to clean out the error file and then rescrape the error'ed out shortcodes.
 - Look into scraping more likes
