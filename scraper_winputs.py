@@ -190,12 +190,20 @@ shortcodes_cavesduroyST = ['3B8LmzhNAZ'	,'3e3HoAhNCG'	,'3e4TKOhNEc'	,'31S2ldhNDk
 
 #All clubs dictionary 
 clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
-clubs = {"rudas": ['BIp3rH_B-UL', 'BIvClGchakB', 'BIsxuwohF2K', 'BIsmQT7BbPj']}
+clubs = {"rudas": ["BFRldI0gaQa"
+,"BcBIHMXlljY"
+,"b99U0OgaeT"
+,"BHT5GCsA5Yj"
+,"3e6U7GAaXI"
+,"BUfN5pRDhDo"
+,"BFuEHZxhNHq"
+,"bmjejYgaf4"
+,"BS9Ido_F8w7"
+,"uWDgKUgaXo"
+,"BYOqF10FArk"]}
 #clubs = {"wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
 
 # errors = ["Bdm-yeph7pX","Bdm-dHoBJzC","kvABh1AaVO","BiFJFKYhVuY","Bhr5O7yhbdm","BhehngpBmbn","Bh7IE-3B7U5","BiibmbABbp0","BikoaIGglxx","BhNYtRHFFqb","BhMpnCcF5De","BgZGnGZHSYj","Bfy7NTYFlAf"]
-
-
 # COMPLETE
 #file = open("data_rudas.csv","w")
 #file.write("ID, SHORTCODE, LIKES, COMMENTS, DATE, IS_VIDEO, VIDEO_VIEW_COUNT\n")

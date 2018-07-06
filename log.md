@@ -113,3 +113,9 @@ Next Steps
 - Determine accuracy of current gender classifier more confidently. 
 - There appears to be some errors with the script that's causing some posts to error. The error traces back to the workaround solution, where a certain key 'ProfilePage' is absent from the JSON. However, the error does not seem reproducible (not sure why this is). Will look into rescraping these when the first round of scraping is done.
 - Look into scraping more likes
+
+## 7/6
+
+Completed 
+- Scraping complete and the results can be found in `Jul5Outputs`. There were 5153 errors out of the total 7655 shortcodes. All errors are logged in logging file. 
+	- Confirmed that the error does not seem to be reproducible. I can look into this as to why it is; I suspect that the 10 preview likes may change the users each time, or the current workaround is inconsistent.
