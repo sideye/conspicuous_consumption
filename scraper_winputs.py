@@ -5,7 +5,7 @@ import datetime
 import re
 import sys
 import gender_guesser.detector as gender
-
+import traceback
 
 def get_datetime(time_code):
 
@@ -132,7 +132,6 @@ def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 		comment_details += tag_string + ',' + mention_string
 
 		file_comments.write(comment_details)
-		print("I WROTE")
 		file_comments.write('\n')
 
 
@@ -191,7 +190,7 @@ shortcodes_cavesduroyST = ['3B8LmzhNAZ'	,'3e3HoAhNCG'	,'3e4TKOhNEc'	,'31S2ldhNDk
 
 #All clubs dictionary 
 clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
-
+clubs = {"rudas": ['BIp3rH_B-UL', 'BIvClGchakB', 'BIsxuwohF2K', 'BIsmQT7BbPj']}
 #clubs = {"wetrepublic": shortcodes_wetrepublic, "templeSF": shortcodes_templeSF, "grandBoston": shortcodes_grandBoston, "grandSF": shortcodes_grandSF, "prsymCH": shortcodes_prysmCH, "cavesduroyST": shortcodes_cavesduroyST}
 
 # errors = ["Bdm-yeph7pX","Bdm-dHoBJzC","kvABh1AaVO","BiFJFKYhVuY","Bhr5O7yhbdm","BhehngpBmbn","Bh7IE-3B7U5","BiibmbABbp0","BikoaIGglxx","BhNYtRHFFqb","BhMpnCcF5De","BgZGnGZHSYj","Bfy7NTYFlAf"]
@@ -303,7 +302,7 @@ for club in clubs:
 		except:
 			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type as a list
 			print("Error on:", code, club)
-			print(str(sys.exc_info()[0]))
+			traceback.print_exc()
 		file_posts.close()
 		file_comments.close()
 		file_likes.close()

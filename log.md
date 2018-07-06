@@ -111,4 +111,5 @@ Completed
 
 Next Steps
 - Determine accuracy of current gender classifier more confidently. 
+- There appears to be some errors with the script that's causing some posts to error. However, the error does not seem reproducible. Will look into rescraping these when the first round of scraping is done.
 - Look into scraping more likes
