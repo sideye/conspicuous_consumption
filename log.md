@@ -119,3 +119,8 @@ Next Steps
 Completed 
 - Scraping complete and the results can be found in `Jul5Outputs`. There were 5153 errors out of the total 7655 shortcodes. All errors are logged in logging file. 
 	- Confirmed that the error does not seem to be reproducible. I can look into this as to why it is; I suspect that the 10 preview likes may change the users each time, or the current workaround is inconsistent.
+
+Next Steps
+- Determine accuracy of current gender classifier more confidently. 
+- Use pandas to clean out the error file and then rescrape the error'ed out shortcodes.
+- Look into scraping more likes
