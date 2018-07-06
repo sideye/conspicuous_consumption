@@ -31,4 +31,4 @@ soup = BeautifulSoup(r.content)
 scripts = soup.find_all('script', type="text/javascript", text=re.compile('window._sharedData'))
 stringified_json = scripts[0].get_text().replace('window._sharedData = ', '')[:-1]
 
-print(type(json.loads(stringified_json)['entry_data']['ProfilePage'][0]))
+json.loads(stringified_json)['entry_data']['ProfilePage'][0]
