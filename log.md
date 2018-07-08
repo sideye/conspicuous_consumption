@@ -125,3 +125,16 @@ Next Steps
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
 - Use pandas + Jupyter to clean out the error file and then rescrape the error'ed out shortcodes.
 - Look into scraping more likes
+
+## 7/8
+
+Completed
+- Grouped all errors by club. All error'ed out shortcodes grouped can be found in the `Jul5Outputs/errors` directory. You can find the script that did  this in the file called `Jul5OutputsCleaning.ipynb`.
+- Began scraping the 5153 error'ed out shortcodes on Azure. Should take ~8-10 hours to complete.
+	- There are still quite a few shortcodes that are erroring, so I'll just rescrape again the ones that error out.
+
+Next Steps
+- Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
+- Look into scraping more likes
+
+
