@@ -130,8 +130,7 @@ Next Steps
 
 Completed
 - Grouped all errors by club. All error'ed out shortcodes grouped can be found in the `Jul5Outputs/errors` directory. You can find the script that did  this in the file called `Jul5OutputsCleaning.ipynb`.
-- Began scraping the 5153 error'ed out shortcodes on Azure. Should take ~8-10 hours to complete.
-	- There are still quite a few shortcodes that are erroring, so I'll just rescrape again the ones that error out.
+- Began scraping the 5153 error'ed out shortcodes on Azure and now we only have 3438 errors. Rescraping again; this'll take a few times I imagine. The 5153-3438 newly successful shortcodes can be found in `Jul8Outputs`. 
 
 Next Steps
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
