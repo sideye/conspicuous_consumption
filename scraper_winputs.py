@@ -6,6 +6,7 @@ import re
 import sys
 import gender_guesser.detector as gender
 import traceback
+import os
 
 def get_datetime(time_code):
 
@@ -270,15 +271,18 @@ clubs = {"rudas": shortcodes_rudas, "oxfordsc_sd": shortcodes_oxfordsc_sd, "wetr
 
 detector = gender.Detector()
 
-
 errors = {}
+output_dir = "Jul15Outputs"
+if not os.path.isdir(output_dir):
+	os.mkdir(output_dir)
+
 for club in clubs:
 	print("Working on", club)
-	file_posts_path = "Jul5Outputs/data_" + club + "_posts.csv"
+	file_posts_path = output_dir + "/data_" + club + "_posts.csv"
 	file_posts = open(file_posts_path, "w")
-	file_comments_path = "Jul5Outputs/data_" + club + "_comments.csv"
+	file_comments_path = output_dir + "/data_" + club + "_comments.csv"
 	file_comments = open(file_comments_path, "w")
-	file_likes_path = "Jul5Outputs/data_" + club + "_likes.csv"
+	file_likes_path = output_dir + "/data_" + club + "_likes.csv"
 	file_likes = open(file_likes_path, "w")
 	file_posts.write("ID,SHORTCODE,LIKES,NUM_COMMENTS,DATE,WEEKDAY,CAPTION,IS_VIDEO,VIDEO_VIEW_COUNT,USERS_LIKED,TAGS,MENTIONS,HAS_COMMENTS\n")
 	file_comments.write("SHORTCODE,COMMENT_ID,COMMENT_USER,COMMENT_TIME,COMMENT_TEXT,COMMENT_TAGS,COMMENT_MENTIONS\n")
@@ -294,17 +298,22 @@ for club in clubs:
 		file_comments = open(file_comments_path, "a")
 		print("Currently working on: ", club, "Code: ", code, index, "out of", len(clubs[club]))
 		index += 1
-		try:
-			single_post_comments(code, file_posts, file_comments, file_likes)
-		except:
-			errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type as a list
-			print("Error on:", code, club)
-			traceback.print_exc()
+		success = None
+		tries = 0
+		while success is None and tries < 100:
+			try:
+				single_post_comments(code, file_posts, file_comments, file_likes)
+				success = 1
+			except:
+				tries += 1
+				errors[code] = [club, sys.exc_info()[0]] # Saves both club info and error type as a list
+				print("Error on:", code, club)
+				traceback.print_exc()
 		file_posts.close()
 		file_comments.close()
 		file_likes.close()
 print(errors)
-file_errors = open("Jul5Outputs/errors.csv", "w")
+file_errors = open(output_dir + "/errors.csv", "w")
 file_errors.write("SHORTCODE,CLUB,ERROR\n")
 for key, value in errors.items():
 	file_errors.write(key + ',' + str(value[0]) + ',' + str(value[1]))
