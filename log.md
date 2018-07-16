@@ -126,7 +126,7 @@ Next Steps
 - Use pandas + Jupyter to clean out the error file and then rescrape the error'ed out shortcodes.
 - Look into scraping more likes
 
-~## 7/8
+## 7/8
 
 Completed
 - Grouped all errors by club. All error'ed out shortcodes grouped can be found in the `Jul5Outputs/errors` directory. You can find the script that did  this in the file called `Jul5OutputsCleaning.ipynb`.
@@ -134,7 +134,7 @@ Completed
 
 Next Steps
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
-- Look into scraping more likes~
+- Look into scraping more likes
 
 ## 7/15
 
