@@ -136,16 +136,19 @@ Next Steps
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
 - Look into scraping more likes
 
-## 7/15
+## 7/15 & 7/16
 
 Completed
-- Revamped code logic to handle errors. New script will now not move on until the parser is able to scrape a full name without error, or until 100 tries have been made. 
-	- **If successful, this will make 7/6 and 7/8's progress obsolete.**
-- Pushed code to VM to begin scraping from scratch. Should take about 24-48 hours. 
+- Revamped code logic to handle errors. New script will now not move on until the parser is able to scrape a full name without error, or until 100 tries have been made. Pushed code to VM to scrape from scratch, and successfully scraped around 6600 shortcodes.
+	- Outputs can be found in the `Jul15Outputs` directory.
+	- **This makes 7/6 and 7/8's progress obsolete.**
+	- Errors are in the `errors.csv` file; there are about 1000 of them.
+- My free 200 USD credit 1 month long Azure subscription has expired, just as we finished scraping up this batch. Hence, the 1000 error'd out shortcodes will not be able to go through face analysis.
 - Moved all older outputs into the folder `Legacy Outputs`. 
 
 Next Steps
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
+- Scrape the 1000 error'd out shortcodes.
 - Look into scraping more likes
 
 
