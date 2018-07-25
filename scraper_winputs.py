@@ -68,7 +68,7 @@ def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 	else:
 		post_details += 'N/A' + ','
 
-	#Scapes likes. Currently instagram only shows the first 10 users.
+	#Scrapes likes. Currently instagram only shows the first 10 users.
 	likes_string = ""
 	for like in node['edge_media_preview_like']['edges']:
 		likes_string += like['node']['username'] + " "
@@ -80,12 +80,16 @@ def single_post_comments(shortcode, file_posts, file_comments, file_likes):
 				gender = "female"
 			file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + gender + ',' + like['node']['profile_pic_url'])
 			file_likes.write("\n")
+		# Deprecated: calls Microsoft Face API to analyze gender. 
+		# else:
+		# 	age, gender = detect_face(like['node']['profile_pic_url'])
+		# 	if gender == None: #No face in picture
+		# 		file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',,' + like['node']['profile_pic_url'])
+		# 	else:
+		# 		file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + str(gender) + ',' + like['node']['profile_pic_url'])
+		# 	file_likes.write("\n")
 		else:
-			age, gender = detect_face(like['node']['profile_pic_url'])
-			if gender == None: #No face in picture
-				file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',,' + like['node']['profile_pic_url'])
-			else:
-				file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + str(gender) + ',' + like['node']['profile_pic_url'])
+			file_likes.write(node['shortcode'] + ',' + like['node']['username'] + ',' + ',' + like['node']['profile_pic_url'])
 			file_likes.write("\n")
 	post_details += likes_string + ','
 

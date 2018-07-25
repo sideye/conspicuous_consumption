@@ -151,4 +151,21 @@ Next Steps
 - Scrape the 1000 error'd out shortcodes.
 - Look into scraping more likes
 
+## 7/24
+
+Completed
+- Cleaned errored shortcodes from last scraping and began rescraping on VM. New script for error scrapings is called `error_scrape.py` and can be found in the `Jul15Outputs` directory.
+- Conducted basic EDA on data. Analyzed recall rate, gender ratio of likes by club, avg number of likes per post by month and by weekday, and number of posts per weekday and month. Report can be found in a PDF called `Precision Recall Analysis`.
+	- **When reading data into pandas, there appears to be an encoding error. The fix is by adding the parameter quoting=csv.QUOTE_NONE into the `pd.read_csv` function call.**
+	- Some results: 
+		- 62% of all profiles had their genders successfully identified. No results on accuracy yet (need to analyze manually).
+		- Out of all successfully identified genders for likes, males made up 64%. This may be due to bias from our classifiers; perhaps male names or male profile pictures are more easily to classify?
+		- Some clubs had more balanced gender ratios on users who liked a post, while others did not. Notably, prysmCH and grandSF had a 50-50 balance, while wetrepublic had >70% males who liked posts.
+		- Somewhat unsurprisingly, posts tend to garner more likes on average in the summer months from June to Sept. There were also more posts during that period.
+		- There was also some variance in posts' like numbers between weekday; specifically posts posted on on a GMT monday averaged 486.5 likes, while those posted on a GMT Saturday garnered only 380 likes on average. This was against my initial intuition (as clubs are most busy on the weekends), although it may make sense: instagram posts are often used to hype up events before or after the event.
+
+Next Steps
+- Noticed a typo with prysmCH as _prsymCH_. Will fix when all shortcodes are done scraping.
+- Look into using selenium to collect more shortcodes?
+- Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
 
