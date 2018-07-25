@@ -154,7 +154,7 @@ Next Steps
 ## 7/24
 
 Completed
-- Cleaned errored shortcodes from last scraping and began rescraping on VM. New script for error scrapings is called `error_scrape.py` and can be found in the `Jul15Outputs` directory.
+- Cleaned errored shortcodes from last scraping and finished rescraping on VM. New script for error scrapings is called `error_scrape.py` and can be found in the `Jul15Outputs` directory. The outputs can also be found there, in a directory called `ErrorFixes`.
 - Conducted basic EDA on data. Analyzed recall rate, gender ratio of likes by club, avg number of likes per post by month and by weekday, and number of posts per weekday and month. Report can be found in a PDF called `Precision Recall Analysis`.
 	- **When reading data into pandas, there appears to be an encoding error. The fix is by adding the parameter quoting=csv.QUOTE_NONE into the `pd.read_csv` function call.**
 	- Some results: 
