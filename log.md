@@ -169,3 +169,8 @@ Next Steps
 - Look into using selenium to collect more shortcodes?
 - Determine accuracy of current gender classifier more confidently by using pandas + Jupyter.
 
+## 7/30
+
+Completed
+- Rescraped the error'd out codes (the errors of the original errors) to remove all error short codes once and for all. 
+- 
