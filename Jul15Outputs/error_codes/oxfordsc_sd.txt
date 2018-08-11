@@ -1,1 +1,0 @@
-shortcodes_oxfordsc_sd = ["BdifKAkj1vy","BXGehZrAv2S","BevYsc6DB2q","BWeh-uzAErD","BeGigtCDFlU","BQed8YGB1P6","BZHobhvAIwq","BUGgrDrA7SW","BhADTINh8ul","BTfaMXDAdt9","Bacw2gxArBe","BU98sQcAnNg","BfjlGtnDDkU","BYjvhDNg8lq","BWIXX7Rg-xG","BTHNe1WgxgJ","BYJ0pKLA-q1","BQ06cxBAzHl","BVF2g-Rgjy8","BdA3F8rDXdt","BVYLPm4g2mX","BR40NG4gcUt",]

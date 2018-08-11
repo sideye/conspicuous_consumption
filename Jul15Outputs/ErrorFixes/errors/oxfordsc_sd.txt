@@ -1,1 +1,0 @@
-shortcodes_oxfordsc_sd = ["BdA3F8rDXdt","BVF2g-Rgjy8",]

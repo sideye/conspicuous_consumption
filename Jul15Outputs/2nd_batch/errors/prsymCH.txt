@@ -1,0 +1,1 @@
+shortcodes_prsymCH = ["Bd7CTC0l2ny","BNfxypiD2R8","BdW8Fg7F3Az","Bfy7NTYFlAf","BbWIn9Jlw2X","BhNYtRHFFqb","BhMpnCcF5De","BRgbureldgc","BineYyeltLU","BgZGnGZHSYj","BWGxGOhle_u","BWgJKvjFi4P",]

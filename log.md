@@ -178,11 +178,13 @@ Next Steps
 - Clean out all outputs from the 7/15 scraping.
 
 
-## 8/10 
+## 8/11
 
 Completed
 - Created a successful selenium web scraper to get all shortcodes of a profile. See the `Selenium` folder.
+- Cleaned up scraped data from 7/15. There were a couple instances where the output went haywire due to different types of quotation marks starting and ending strings, which did not properly close the string and hence affected the shape of the table for the CSV file. Also found considerable duplicate rows between the batches, which have now been removed. 
+	- All final outputs can be found in the `final_outputs` directory within `Jul15Outputs`. 
+	- Source files from the 3 different batches of output scraping (2nd batch is the errors from the 1st batch, and the 3rd batch is the errors from the 2nd batch) have been moved to their respective directories. 
 
 Next Steps
-- Clean out all outputs from the 7/15 scraping.
-- Port the selenium code into a standalon `.py` file (instead of through jupyter notebook). Then execute the selenium web scraper on some new clubs. 
+- Port the selenium code into a standalone `.py` file (instead of through jupyter notebook). Then execute the selenium web scraper on some new clubs. 

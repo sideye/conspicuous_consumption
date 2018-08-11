@@ -1,1 +1,0 @@
-shortcodes_rudas = ["BInNBO9gU8i","BGU6yTendHQ","BHNSO5CAbfS","BG1XmCcndNs","BElq0D_ndMh","BDESSv3ndKF","BFojCZiHdFu","BFt8Bv5HdJU","Bdm-yeph7pX","BE3P4LrndE4","BGgS7l8HdHz","Bdm-dHoBJzC","BDcyuvMHdFC",]
