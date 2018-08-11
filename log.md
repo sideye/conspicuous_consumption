@@ -173,4 +173,16 @@ Next Steps
 
 Completed
 - Rescraped the error'd out codes (the errors of the original errors) to remove all error short codes once and for all. 
-- 
+
+Next Steps
+- Clean out all outputs from the 7/15 scraping.
+
+
+## 8/10 
+
+Completed
+- Created a successful selenium web scraper to get all shortcodes of a profile. See the `Selenium` folder.
+
+Next Steps
+- Clean out all outputs from the 7/15 scraping.
+- Execute the selenium web scraper on some new clubs. 
