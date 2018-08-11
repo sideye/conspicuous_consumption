@@ -185,4 +185,4 @@ Completed
 
 Next Steps
 - Clean out all outputs from the 7/15 scraping.
-- Execute the selenium web scraper on some new clubs. 
+- Port the selenium code into a standalon `.py` file (instead of through jupyter notebook). Then execute the selenium web scraper on some new clubs. 
