@@ -178,10 +178,11 @@ Next Steps
 - Clean out all outputs from the 7/15 scraping.
 
 
-## 8/11
+## 8/14
 
 Completed
-- Created a successful selenium web scraper to get all shortcodes of a profile. See the `Selenium` folder.
+- Created a successful selenium web scraper to get all shortcodes of a profile. See the `Selenium` folder. 
+	-I've scraped shortcodes for CLE Houston, Ohm LA, and Boulevard3 LA at this moment.
 - Cleaned up scraped data from 7/15. There were a couple instances where the output went haywire due to different types of quotation marks starting and ending strings, which did not properly close the string and hence affected the shape of the table for the CSV file. Also found considerable duplicate rows between the batches, which have now been removed. 
 	- All final outputs can be found in the `final_outputs` directory within `Jul15Outputs`. 
 	- Source files from the 3 different batches of output scraping (2nd batch is the errors from the 1st batch, and the 3rd batch is the errors from the 2nd batch) have been moved to their respective directories. 
