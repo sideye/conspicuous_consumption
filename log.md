@@ -194,4 +194,4 @@ Next Steps
 
 Completed
 - Modified Selenium script slightly to counteract an annoyance in which Instagram switches around the div containers to mess up the XPath, causing Selenium to fail to find elements by its container location.
-	- Began scraping Temple Denver and Hakkasan LV.
+	- Completed scraping Temple Denver and Hakkasan LV.
