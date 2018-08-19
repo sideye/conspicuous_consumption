@@ -197,5 +197,7 @@ Completed
 	- Completed scraping Temple Denver and Hakkasan LV.
 -Began scraping Cle Houston, Ohm LA, and Boulevard3's shortcodes for instagram data on a virtual machine.
 
+
 Next Steps
-- Port the selenium code into a standalone `.py` file (instead of through jupyter notebook). Then execute the selenium web scraper on some new clubs. 
+- Port the selenium code into a standalone `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.
+- Clean data from `Jul15Outputs`: prsym typo, remove duplicate likes/posts/comments
