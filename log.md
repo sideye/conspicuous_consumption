@@ -195,3 +195,7 @@ Next Steps
 Completed
 - Modified Selenium script slightly to counteract an annoyance in which Instagram switches around the div containers to mess up the XPath, causing Selenium to fail to find elements by its container location.
 	- Completed scraping Temple Denver and Hakkasan LV.
+-Began scraping Cle Houston, Ohm LA, and Boulevard3's shortcodes for instagram data on a virtual machine.
+
+Next Steps
+- Port the selenium code into a standalone `.py` file (instead of through jupyter notebook). Then execute the selenium web scraper on some new clubs. 
