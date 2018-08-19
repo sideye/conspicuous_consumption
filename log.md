@@ -195,9 +195,16 @@ Next Steps
 Completed
 - Modified Selenium script slightly to counteract an annoyance in which Instagram switches around the div containers to mess up the XPath, causing Selenium to fail to find elements by its container location.
 	- Completed scraping Temple Denver and Hakkasan LV.
--Began scraping Cle Houston, Ohm LA, and Boulevard3's shortcodes for instagram data on a virtual machine.
-
+- Finished scraping Cle Houston, Ohm LA, and Boulevard3's shortcodes for instagram data on a virtual machine. Outputs can be found in the `Aug18Outputs` directory.
+	- Bad news: Instagram now provides no information for user likes, down from the first 10 users (which could be found in the field "edge_preview_likes"). This means that we no longer know any users who like a post. Therefore, the likes table of each club is completely empty. 
+- Conducted gender Analysis for gender distributions of users who liked posts containing champagne and vodka on data from Rudas and OxfordSD. There appears to be not much noticeable difference, especially with Rudas. See the `Gender Analysis of Likes for Posts Containing Champagne and Vodka` notebook. Note that sum of all likes is out of 10, as we were only able to scrape the first 10 users who liked a post (and the rest are unknown gender users).
+	- Average amount of likes by men & women for a rudas post containing vodka: 2.5714285714285716, 2.142857142857143
+	- Average amount of likes by men & women for a rudas post containing champagne: 2.5294117647058822, 2.235294117647059
+	- Average amount of likes by men & women for a oxford post containing vodka: 4.333333333333333, 3.3333333333333335 //NOTE: only 3 posts
+	- Average amount of likes by men & women for a oxford post containing champagne: 3.176470588235294, 3.588235294117647
 
 Next Steps
-- Port the selenium code into a standalone `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.
+- Port the selenium code into a `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.
 - Clean data from `Jul15Outputs`: prsym typo, remove duplicate likes/posts/comments
+- More data analysis based on the encoded features. 
+- Find out a way to determine the users who liked a post.
