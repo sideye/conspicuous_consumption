@@ -1,0 +1,7 @@
+gender-guesser
+bs4
+pandas
+matplotlib
+numpy
+selenium
+seaborn

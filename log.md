@@ -204,7 +204,18 @@ Completed
 	- Average amount of likes by men & women for a oxford post containing champagne: 3.176470588235294, 3.588235294117647
 
 Next Steps
-- Port the selenium code into a `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.
+- ~Port the selenium code into a `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.~
 - Clean data from `Jul15Outputs`: prsym typo, remove duplicate likes/posts/comments
 - More data analysis based on the encoded features. 
 - Find out a way to determine the users who liked a post.
+- Check for gender analysis of non alcohol containing posts.
+- Summary statistics for all clubs; average likes, average comments, common mentions, etc,.
+- Documentation for code, work pipeline for handoff. Refactor, add comments. Requirements.txt file. 
+
+8/23 
+
+Completed 
+- Cleaned data from `Jul15Outputs`: removed duplicate likes, posts, and comments, and fixed prsym typo. New outputs can be found in the `clean_outputs` directory within `July15Outputs`.
+- Added documentation on how to run the post scraper and shortcode scraper. See the `howto.md` file. 
+- Some more comments have been added into the code. 
+- Added a requirements.txt file to install all required dependencies. Before running anything, install the dependencies by executing the following command in the command line: `pip install -r requirements.txt`
