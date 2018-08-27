@@ -202,6 +202,7 @@ Completed
 	- Average amount of likes by men & women for a rudas post containing champagne: 2.5294117647058822, 2.235294117647059
 	- Average amount of likes by men & women for a oxford post containing vodka: 4.333333333333333, 3.3333333333333335 //NOTE: only 3 posts
 	- Average amount of likes by men & women for a oxford post containing champagne: 3.176470588235294, 3.588235294117647
+	- I am personally a little skeptical of the gender accuracy, as there may be many sources of bias: from being able to collect only the first 10 likes to the gender detectors via Face API and name guesser.
 
 Next Steps
 - ~Port the selenium code into a `.py` file (instead of through jupyter notebook), and merge with existing scraper function. Clean up entire program and add more documentation.~
@@ -216,6 +217,8 @@ Next Steps
 
 Completed 
 - Cleaned data from `Jul15Outputs`: removed duplicate likes, posts, and comments, and fixed prsym typo. New outputs can be found in the `clean_outputs` directory within `July15Outputs`.
-- Added documentation on how to run the post scraper and shortcode scraper. See the `howto.md` file. 
+- Added documentation on how to run the post scraper and shortcode scraper. See the `README.md` file. 
 - Some more comments have been added into the code. 
 - Added a requirements.txt file to install all required dependencies. Before running anything, install the dependencies by executing the following command in the command line: `pip install -r requirements.txt`
+- Did some overall club comparsion, including comparisons for likes, comments, most common mentions, gender ratios of likes, and more. Results can be found in the `Overall Club Comparison` notebook, exported as HTM file also.
+
